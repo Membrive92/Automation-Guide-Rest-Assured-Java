@@ -1,5 +1,6 @@
 package com.rest;
 
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -59,5 +60,23 @@ public class AutomateGet {
                 extract().
                 response();
         System.out.println("response = " + savedResponse.asString());
+    }
+
+    @Test
+    public void extract_single_value_from_response(){
+        Response savedResponse = given().
+                baseUri("https://api.postman.com").
+                header("X-Api-Key", postmanApiKey()).
+                when().
+                get("/workspaces").
+                then().
+                log().all().
+                assertThat().
+                statusCode(200).
+                extract().
+                response();
+        JsonPath jsonPath = new JsonPath(savedResponse.asString());
+        System.out.println("workspace name = " + jsonPath.getString("workspaces[0].name"));
+      //    System.out.println("workspace name = " + savedResponse.path("workspaces[0].name"));
     }
 }
