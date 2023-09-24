@@ -44,4 +44,20 @@ public class AutomateGet {
                         "workspaces.name", hasItem("GPM")
                 );
     }
+
+    @Test
+    public void extract_response(){
+        Response savedResponse = given().
+                baseUri("https://api.postman.com").
+                header("X-Api-Key", postmanApiKey()).
+        when().
+                get("/workspaces").
+        then().
+                log().all().
+                assertThat().
+                statusCode(200).
+                extract().
+                response();
+        System.out.println("response = " + savedResponse.asString());
+    }
 }
