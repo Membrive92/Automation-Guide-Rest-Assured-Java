@@ -64,7 +64,7 @@ public class AutomateGet {
 
     @Test
     public void extract_single_value_from_response(){
-        Response savedResponse = given().
+        String savedResponse = given().
                 baseUri("https://api.postman.com").
                 header("X-Api-Key", postmanApiKey()).
                 when().
@@ -74,9 +74,10 @@ public class AutomateGet {
                 assertThat().
                 statusCode(200).
                 extract().
-                response();
-        JsonPath jsonPath = new JsonPath(savedResponse.asString());
-        System.out.println("workspace name = " + jsonPath.getString("workspaces[0].name"));
+                response().asString();
+
+        JsonPath.from(savedResponse).getString("workspaces[0].name");
+       // System.out.println("workspace name = " + jsonPath.getString("workspaces[0].name"));
       //    System.out.println("workspace name = " + savedResponse.path("workspaces[0].name"));
     }
 }
