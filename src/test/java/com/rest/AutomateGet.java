@@ -5,10 +5,9 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Collections;
-
 import static com.rest.utils.utils.postmanApiKey;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class AutomateGet {
@@ -80,5 +79,25 @@ public class AutomateGet {
         // System.out.println("workspace name = " + JsonPath.from(savedResponse).getString("workspaces[0].name"));
        // System.out.println("workspace name = " + jsonPath.getString("workspaces[0].name"));
       //    System.out.println("workspace name = " + savedResponse.path("workspaces[0].name"));
+    }
+
+    @Test
+    public void hamcrest_assert_on_extracted_response(){
+        String name = given().
+                baseUri("https://api.postman.com").
+                header("X-Api-Key", postmanApiKey()).
+                when().
+                get("/workspaces").
+                then().
+                log().all().
+                assertThat().
+                statusCode(200).
+                extract().
+                response().path("workspaces[0].name");
+        System.out.println("workspace name = " + name);
+
+        //hamcrest assert
+        assertThat(name, equalTo("Team Workspace"));
+        //testng assert --> Assert.assertEquals(name, "Team Workspace");
     }
 }
