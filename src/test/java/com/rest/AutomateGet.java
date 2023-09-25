@@ -100,4 +100,19 @@ public class AutomateGet {
         assertThat(name, equalTo("Team Workspace"));
         //testng assert --> Assert.assertEquals(name, "Team Workspace");
     }
+
+    @Test
+    public void validate_response_body_hamcrest_learings(){
+        given().
+                baseUri("https://api.postman.com").
+                header("X-Api-Key", postmanApiKey()).
+                when().
+                get("/workspaces").
+                then().
+                log().all().
+                assertThat().
+                statusCode(200).
+                body("workspaces.name", contains("Team Workspace", "Rest-assured course", "GPM")
+                );
+    }
 }
