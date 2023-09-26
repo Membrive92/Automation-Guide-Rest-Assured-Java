@@ -102,7 +102,7 @@ public class AutomateGet {
     }
 
     @Test
-    public void validate_response_body_hamcrest_learings(){
+    public void validate_response_body_hamcrest_learings_with_contains(){
         given().
                 baseUri("https://api.postman.com").
                 header("X-Api-Key", postmanApiKey()).
@@ -113,6 +113,24 @@ public class AutomateGet {
                 assertThat().
                 statusCode(200).
                 body("workspaces.name", contains("Team Workspace", "Rest-assured course", "GPM")
+                );
+    }
+
+    @Test
+    public void validate_response_body_hamcrest_learings_with_contains_in_any_order(){
+        given().
+                baseUri("https://api.postman.com").
+                header("X-Api-Key", postmanApiKey()).
+                when().
+                get("/workspaces").
+                then().
+                log().all().
+                assertThat().
+                statusCode(200).
+                body("workspaces.name", containsInAnyOrder("Team Workspace", "Rest-assured course", "GPM"),
+                        "workspaces.name", is(not(emptyArray())),
+                        "workspaces.name", hasSize(3),
+                        "workspaces.name", everyItem(startsWith("T"))
                 );
     }
 }
