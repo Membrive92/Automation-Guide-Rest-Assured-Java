@@ -136,8 +136,8 @@ public class AutomateGet {
                         "workspaces[0]", hasKey("id"),
                         "workspaces[0]", hasValue("Team Workspace"),
                         "workspaces[0]", hasEntry("id","c8c8715e-c3cc-419b-8d15-1db794077956"),
-                        "workspaces[0]", not(equalTo(Collections.EMPTY_MAP))
-
+                        "workspaces[0]", not(equalTo(Collections.EMPTY_MAP)),
+                        "workspaces[0].name", allOf(startsWith("Team"), containsString("Workspace"))
                 );
     }
 }
