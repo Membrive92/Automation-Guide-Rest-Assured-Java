@@ -9,6 +9,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.rest.utils.utils.postmanApiKey;
 import static io.restassured.RestAssured.config;
@@ -146,14 +148,20 @@ public class AutomateGet {
     }
     @Test
     public void request_response_logging(){
+        Set<String> headers = new HashSet<String>();
+        headers.add("X-Api-Key");
+        headers.add("Accept");
+
         given().
                 baseUri("https://api.postman.com").
-                header("X-Api-Key", postmanApiKey()+"d").
-                config(config.logConfig(LogConfig.logConfig().enableLoggingOfRequestAndResponseIfValidationFails())).
+                header("X-Api-Key", postmanApiKey()).
+                config(config.logConfig(LogConfig.logConfig().blacklistHeaders(headers))).
+                log().all().
         when().
                 get("/workspaces").
         then().
+                log().all().
                 assertThat().
-                statusCode(201);
+                statusCode(200);
     }
 }
