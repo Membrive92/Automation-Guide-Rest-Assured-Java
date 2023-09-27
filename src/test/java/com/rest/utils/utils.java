@@ -1,6 +1,5 @@
 package com.rest.utils;
 
-import java.util.Arrays;
 import java.util.Base64;
 
 public class utils {
@@ -10,5 +9,4 @@ public class utils {
 
         return new String(bytesDecodes);
     }
-
 }

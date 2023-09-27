@@ -1,7 +1,9 @@
 package com.rest;
 
+import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,8 +14,8 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class AutomateGet {
 
+public class AutomateGet {
     @Test
     public void validate_status_code(){
         given().
@@ -139,5 +141,18 @@ public class AutomateGet {
                         "workspaces[0]", not(equalTo(Collections.EMPTY_MAP)),
                         "workspaces[0].name", allOf(startsWith("Team"), containsString("Workspace"))
                 );
+    }
+    @Test
+    public void request_response_logging(){
+        given().
+                baseUri("https://api.postman.com").
+                header("X-Api-Key", postmanApiKey()).
+                log().parameters().
+        when().
+                get("/workspaces").
+        then().
+                log().ifError().
+                assertThat().
+                statusCode(200);
     }
 }
