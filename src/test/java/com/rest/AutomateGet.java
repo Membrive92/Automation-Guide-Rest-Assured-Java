@@ -5,6 +5,8 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
+
 import static com.rest.utils.utils.postmanApiKey;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -130,7 +132,12 @@ public class AutomateGet {
                 body("workspaces.name", containsInAnyOrder("Team Workspace", "Rest-assured course", "GPM"),
                         "workspaces.name", is(not(emptyArray())),
                         "workspaces.name", hasSize(3),
-                        "workspaces.name", everyItem(startsWith("T"))
+                      //  "workspaces.name", everyItem(startsWith("T"))
+                        "workspaces[0]", hasKey("id"),
+                        "workspaces[0]", hasValue("Team Workspace"),
+                        "workspaces[0]", hasEntry("id","c8c8715e-c3cc-419b-8d15-1db794077956"),
+                        "workspaces[0]", not(equalTo(Collections.EMPTY_MAP))
+
                 );
     }
 }
