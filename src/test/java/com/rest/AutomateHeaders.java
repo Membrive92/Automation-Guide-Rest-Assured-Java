@@ -98,4 +98,30 @@ public class AutomateHeaders {
                  headers("responseHeader", "resValue2",
                         "X-RateLimit-Limit", "120");
     }
+
+    @Test
+    public void extract_response_headers() {
+        Header header1 = new Header("multiValueHeader", "value1");
+        Header header2 = new Header("x-mock-match-request-headers", "header");
+        Headers headers = new Headers(header1, header2);
+
+       Headers extractHeaders =  given().
+                baseUri("https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io").
+                headers(headers).
+        when().
+                get("/get").
+        then().
+                assertThat().
+                statusCode(200).
+                extract().
+                headers();
+       for (Header header : extractHeaders) {
+           System.out.println("header name = " + header.getName() +  ", ");
+           System.out.println("header value = " + header.getValue());
+       }
+
+     /*   System.out.println("header name = " +extractHeaders.get("responseHeader").getName());
+        System.out.println("header value = " +extractHeaders.get("responseHeader").getValue());
+        System.out.println("header value = " +extractHeaders.getValue("responseHeader"));*/
+    }
 }
