@@ -4,6 +4,8 @@ import io.restassured.http.Header;
 import io.restassured.http.Headers;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
+
 import static io.restassured.RestAssured.given;
 
 public class AutomateHeaders {
@@ -35,6 +37,24 @@ public class AutomateHeaders {
                 baseUri("https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io").
                 headers(headers).
                 header(matchHeader).
+        when().
+                get("/get").
+        then().
+                log().all().
+                assertThat().
+                statusCode(200);
+    }
+
+    @Test
+    public void multiple_headers_using_map() {
+        HashMap<String, String> headersMap = new HashMap<String, String>();
+        headersMap.put("header", "value1");
+        headersMap.put("x-mock-match-request-headers", "header");
+
+
+        given().
+                baseUri("https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io").
+                headers(headersMap).
         when().
                 get("/get").
         then().
