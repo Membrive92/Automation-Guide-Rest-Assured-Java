@@ -62,4 +62,22 @@ public class AutomateHeaders {
                 assertThat().
                 statusCode(200);
     }
+
+    @Test
+    public void multiple_value_headers_in_headers() {
+        Header header1 = new Header("multiValueHeader", "value1");
+        Header header2 = new Header("multiValueHeader", "header");
+        Headers headers = new Headers(header1, header2);
+
+        given().
+                baseUri("https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io").
+               // header("multipleValueHeader", "value1","value2").
+               headers(headers).
+        when().
+                get("/get").
+        then().
+                log().all().
+                assertThat().
+                statusCode(200);
+    }
 }
