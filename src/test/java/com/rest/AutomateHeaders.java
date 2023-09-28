@@ -51,7 +51,6 @@ public class AutomateHeaders {
         headersMap.put("header", "value1");
         headersMap.put("x-mock-match-request-headers", "header");
 
-
         given().
                 baseUri("https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io").
                 headers(headersMap).
@@ -79,5 +78,24 @@ public class AutomateHeaders {
                 log().all().
                 assertThat().
                 statusCode(200);
+    }
+
+    @Test
+    public void assert_response_headers() {
+        Header header1 = new Header("multiValueHeader", "value1");
+        Header header2 = new Header("x-mock-match-request-headers", "header");
+        Headers headers = new Headers(header1, header2);
+
+        given().
+                baseUri("https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io").
+                        headers(headers).
+        when().
+                get("/get").
+        then().
+                assertThat().
+                statusCode(200).
+                //header("responseHeader", "resValue1");
+                 headers("responseHeader", "resValue2",
+                        "X-RateLimit-Limit", "120");
     }
 }
