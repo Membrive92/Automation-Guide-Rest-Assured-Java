@@ -5,6 +5,7 @@ import io.restassured.http.Headers;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
@@ -123,5 +124,28 @@ public class AutomateHeaders {
      /*   System.out.println("header name = " +extractHeaders.get("responseHeader").getName());
         System.out.println("header value = " +extractHeaders.get("responseHeader").getValue());
         System.out.println("header value = " +extractHeaders.getValue("responseHeader"));*/
+    }
+
+    @Test
+    public void extract_multivalue_response_headers() {
+        HashMap<String, String> headersMap = new HashMap<String, String>();
+        headersMap.put("header", "value1");
+        headersMap.put("x-mock-match-request-headers", "header");
+
+        Headers extractHeaders = given().
+                baseUri("https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io").
+                headers(headersMap).
+        when().
+                get("/get").
+        then().
+                assertThat().
+                statusCode(200).
+                extract().
+                headers();
+
+        List<String> values = extractHeaders.getValues("multiValueHeader");
+        for (String headerValue:values) {
+            System.out.println(headerValue);
+        }
     }
 }
