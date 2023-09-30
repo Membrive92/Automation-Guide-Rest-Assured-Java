@@ -4,7 +4,9 @@ import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.response.Response;
+import io.restassured.specification.QueryableRequestSpecification;
 import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.SpecificationQuerier;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -32,6 +34,13 @@ public class RequestSpecificationExample {
         //default requestSpecification is a variable defined in RestAssured
         requestSpecification = requestSpecBuilder.build();
 
+    }
+    //To query or retrieve details from RequestSpecification
+    @Test
+    public void queryTest() {
+        QueryableRequestSpecification queryableRequestSpecification = SpecificationQuerier.
+                query(requestSpecification);
+        System.out.println(queryableRequestSpecification.getBaseUri());
     }
 
     @Test
