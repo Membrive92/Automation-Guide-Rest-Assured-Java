@@ -1,5 +1,6 @@
 package com.rest.RequestSpecification;
 
+import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.response.Response;
@@ -16,7 +17,6 @@ import static org.hamcrest.Matchers.is;
 
 
 public class RequestSpecificationExample {
-   RequestSpecification requestSpecification;
 
     @BeforeClass
     public void beforeClass() {
@@ -29,21 +29,20 @@ public class RequestSpecificationExample {
         requestSpecBuilder.addHeader("X-Api-Key", postmanApiKey());
         requestSpecBuilder.log(LogDetail.ALL);
 
+        //default requestSpecification is a variable defined in RestAssured
         requestSpecification = requestSpecBuilder.build();
 
     }
 
     @Test
     public void validate_status_code() {
-        Response response = given(requestSpecification).
-                header("testHeader", "testValue").
-                get("/workspaces").then().log().all().extract().response();
+        Response response = get("/workspaces").then().log().all().extract().response();
         assertThat(response.statusCode(), is(equalTo(200)));
     }
 
     @Test
     public void validate_response_body() {
-        Response response = given(requestSpecification).get("/workspaces").then().log().all().extract().response();
+        Response response = get("/workspaces").then().log().all().extract().response();
         assertThat(response.statusCode(), is(equalTo(200)));
         assertThat(response.path("workspaces[0].name"), equalTo("Team Workspace"));
     }
