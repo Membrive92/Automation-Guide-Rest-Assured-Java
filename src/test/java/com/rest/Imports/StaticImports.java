@@ -1,10 +1,9 @@
-package com.rest;
+package com.rest.Imports;
 
 import org.testng.annotations.Test;
 
-import static com.rest.utils.utils.postmanApiKey;
+import static com.rest.Utils.Utils.postmanApiKey;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 public class StaticImports {

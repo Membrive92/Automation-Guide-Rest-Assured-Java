@@ -1,10 +1,9 @@
-package com.rest;
+package com.rest.Imports;
 
 import io.restassured.RestAssured;
-import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
-import static com.rest.utils.utils.postmanApiKey;
+import static com.rest.Utils.Utils.postmanApiKey;
 
 public class NonStaticImports {
 

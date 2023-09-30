@@ -1,18 +1,14 @@
-package com.rest;
+package com.rest.Automate;
 
-import io.restassured.RestAssured;
 import io.restassured.config.LogConfig;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.rest.utils.utils.postmanApiKey;
+import static com.rest.Utils.Utils.postmanApiKey;
 import static io.restassured.RestAssured.config;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;

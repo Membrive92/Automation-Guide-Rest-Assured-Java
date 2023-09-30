@@ -1,4 +1,4 @@
-package com.rest;
+package com.rest.Automate;
 
 import io.restassured.http.Header;
 import io.restassured.http.Headers;

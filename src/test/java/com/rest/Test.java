@@ -1,9 +1,7 @@
 package com.rest;
 
-import static com.rest.utils.utils.postmanApiKey;
+import static com.rest.Utils.Utils.postmanApiKey;
 import static io.restassured.RestAssured.*;
-import static io.restassured.matcher.ResponseAwareMatcher.*;
-import static org.hamcrest.Matcher.*;
 
 public class Test {
     @org.testng.annotations.Test
