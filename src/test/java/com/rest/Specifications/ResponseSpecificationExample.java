@@ -1,5 +1,6 @@
 package com.rest.Specifications;
 
+import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -17,15 +18,12 @@ import static org.hamcrest.Matchers.equalTo;
 
 
 public class ResponseSpecificationExample {
-    ResponseSpecification responseSpecification;
-
     @BeforeClass
     public void beforeClass() {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
         requestSpecBuilder.setBaseUri("https://api.postman.com");
         requestSpecBuilder.addHeader("X-Api-Key", postmanApiKey());
         requestSpecBuilder.log(LogDetail.ALL);
-
         requestSpecification = requestSpecBuilder.build();
 
      /*   responseSpecification = RestAssured.expect().
@@ -36,22 +34,20 @@ public class ResponseSpecificationExample {
                 expectStatusCode(200).
                 expectContentType(ContentType.JSON).
                 log(LogDetail.ALL);
-
-        responseSpecification = responseSpecBuilder.build();
+       RestAssured.responseSpecification = responseSpecBuilder.build();
     }
 
     @Test
     public void validate_status_code() {
-        get("/workspaces").
-        then().spec(responseSpecification);
+        get("/workspaces");
     }
 
     @Test
     public void validate_response_body() {
         Response response =   get("/workspaces").
-                then().spec(responseSpecification).
-                        extract().
-                        response();
+                then().
+                extract().
+                response();
         assertThat(response.path("workspaces[0].name"), equalTo("Team Workspace"));
     }
 }
