@@ -1,13 +1,11 @@
 package com.rest.Specifications;
 
-import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import io.restassured.specification.QueryableRequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import io.restassured.specification.SpecificationQuerier;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -16,7 +14,7 @@ import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.requestSpecification;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+
 
 public class ResponseSpecificationExample {
     ResponseSpecification responseSpecification;
@@ -29,9 +27,17 @@ public class ResponseSpecificationExample {
         requestSpecBuilder.log(LogDetail.ALL);
 
         requestSpecification = requestSpecBuilder.build();
-        responseSpecification = RestAssured.expect().
+
+     /*   responseSpecification = RestAssured.expect().
                 statusCode(200).
-                contentType(ContentType.JSON);
+                contentType(ContentType.JSON);*/
+
+        ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder().
+                expectStatusCode(200).
+                expectContentType(ContentType.JSON).
+                log(LogDetail.ALL);
+
+        responseSpecification = responseSpecBuilder.build();
     }
 
     @Test
