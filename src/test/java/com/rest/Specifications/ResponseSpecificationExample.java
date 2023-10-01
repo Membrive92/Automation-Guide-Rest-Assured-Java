@@ -1,59 +1,52 @@
-package com.rest.RequestSpecification;
+package com.rest.Specifications;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.QueryableRequestSpecification;
-import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
 import io.restassured.specification.SpecificationQuerier;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-
 import static com.rest.Utils.Utils.postmanApiKey;
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.get;
+import static io.restassured.RestAssured.requestSpecification;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
-
-public class RequestSpecificationExample {
+public class ResponseSpecificationExample {
+    ResponseSpecification responseSpecification;
 
     @BeforeClass
     public void beforeClass() {
-     /*   requestSpecification = with().
-                baseUri("https://api.postman.com").
-                header("X-Api-Key", postmanApiKey());*/
-
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
         requestSpecBuilder.setBaseUri("https://api.postman.com");
         requestSpecBuilder.addHeader("X-Api-Key", postmanApiKey());
         requestSpecBuilder.log(LogDetail.ALL);
 
-        //default requestSpecification is a variable defined in RestAssured
         requestSpecification = requestSpecBuilder.build();
-
-    }
-    //To query or retrieve details from RequestSpecification
-    @Test
-    public void queryTest() {
-        QueryableRequestSpecification queryableRequestSpecification = SpecificationQuerier.
-                query(requestSpecification);
-        System.out.println(queryableRequestSpecification.getBaseUri());
+        responseSpecification = RestAssured.expect().
+                statusCode(200).
+                contentType(ContentType.JSON);
     }
 
     @Test
     public void validate_status_code() {
-        Response response = get("/workspaces").then().log().all().extract().response();
-        assertThat(response.statusCode(), is(equalTo(200)));
+        get("/workspaces").
+        then().spec(responseSpecification);
     }
 
     @Test
     public void validate_response_body() {
-        Response response = get("/workspaces").then().log().all().extract().response();
-        assertThat(response.statusCode(), is(equalTo(200)));
+        Response response =   get("/workspaces").
+                then().spec(responseSpecification).
+                        extract().
+                        response();
         assertThat(response.path("workspaces[0].name"), equalTo("Team Workspace"));
     }
-
 }
+
