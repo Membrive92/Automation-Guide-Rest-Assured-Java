@@ -15,7 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.matchesPattern;
 
-public class AutomatePost {
+public class AutomatePut {
     @BeforeClass
     public void beforeClass() {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
@@ -33,38 +33,24 @@ public class AutomatePost {
     }
 
     @Test
-    public void validate_post_request_bdd_style() {
+    public void validate_put_request_bdd_style() {
+        String workspaceId = "3d1ad052-8a25-4b74-987d-f981146f6759";
         String payload = "{\n" +
                 "    \"workspace\": {\n" +
-                "        \"name\": \"myFirstWorkspace\",\n" +
+                "        \"name\": \"myNewFirstWorkspace\",\n" +
                 "        \"type\": \"personal\",\n" +
                 "        \"description\": \"Rest Assured created this\"\n" +
                 "    }\n" +
                 "}";
         given().
                 body(payload).
+                pathParam("workspaceId", workspaceId).
         when().
-                post("/workspaces").
+                put("/workspaces/{workspaceId}").
         then().
                 assertThat().
-                body("workspace.name", equalTo("myFirstWorkspace"),
-                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
-    }
-
-    @Test
-    public void validate_post_request_non_bdd_style() {
-        String payload = "{\n" +
-                "    \"workspace\": {\n" +
-                "        \"name\": \"myFirstWorkspace2\",\n" +
-                "        \"type\": \"personal\",\n" +
-                "        \"description\": \"Rest Assured created this\"\n" +
-                "    }\n" +
-                "}";
-
-        Response response = with().
-                body(payload).
-                post("/workspaces");
-        assertThat(response.path("workspace.name"), equalTo("myFirstWorkspace2"));
-        assertThat(response.path("workspace.id"), matchesPattern("^[a-z0-9-]{36}$"));
+                body("workspace.name", equalTo("myNewFirstWorkspace"),
+                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"),
+                        "workspace.id", equalTo(workspaceId));
     }
 }
