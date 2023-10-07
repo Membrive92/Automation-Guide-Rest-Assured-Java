@@ -9,6 +9,8 @@ import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.File;
+
 import static com.rest.Utils.Utils.postmanApiKey;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -65,6 +67,17 @@ public class AutomatePost {
                 body(payload).
                 post("/workspaces");
         assertThat(response.path("workspace.name"), equalTo("myFirstWorkspace2"));
+        assertThat(response.path("workspace.id"), matchesPattern("^[a-z0-9-]{36}$"));
+    }
+
+    @Test
+    public void validate_post_request_payload_from_file() {
+        File file = new File("src/main/resources/CreateWorkspacePayload.json");
+
+        Response response = with().
+                body(file).
+                post("/workspaces");
+        assertThat(response.path("workspace.name"), equalTo("mySecondWorkspaceFile"));
         assertThat(response.path("workspace.id"), matchesPattern("^[a-z0-9-]{36}$"));
     }
 }
