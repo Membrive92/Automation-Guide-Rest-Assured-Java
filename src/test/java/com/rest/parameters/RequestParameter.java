@@ -2,6 +2,7 @@ package com.rest.parameters;
 
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
@@ -73,6 +74,22 @@ public class RequestParameter {
                 baseUri("https://postman-echo.com").
                 multiPart("foo1", "bar1").
                 multiPart("foo2", "bar2").
+                log().all().
+        when().
+                post("/post").
+        then().
+                log().all().
+                assertThat().
+                statusCode(200);
+    }
+
+    @Test
+    public void upload_file_multipart_form_data(){
+        String attributes = "{\"name\":\"temp.txt\",\"parent\":{\"id\":\"123456\"}}";
+        given().
+                baseUri("https://postman-echo.com").
+                multiPart("file", new File("src/main/resources/temp.txt")).
+                multiPart("attributes", attributes, "multipart/form-data").
                 log().all().
         when().
                 post("/post").
