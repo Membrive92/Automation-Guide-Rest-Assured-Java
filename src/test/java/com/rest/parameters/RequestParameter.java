@@ -1,10 +1,12 @@
 package com.rest.parameters;
 
+import io.restassured.config.EncoderConfig;
 import org.testng.annotations.Test;
 
 import java.io.File;
 import java.util.HashMap;
 
+import static io.restassured.RestAssured.config;
 import static io.restassured.RestAssured.given;
 
 public class RequestParameter {
@@ -84,12 +86,14 @@ public class RequestParameter {
     }
 
     @Test
-    public void upload_file_multipart_form_data(){
-        String attributes = "{\"name\":\"temp.txt\",\"parent\":{\"id\":\"123456\"}}";
+    public void form_urlencoded(){
         given().
                 baseUri("https://postman-echo.com").
-                multiPart("file", new File("src/main/resources/temp.txt")).
-                multiPart("attributes", attributes, "multipart/form-data").
+                config(config.encoderConfig(EncoderConfig.encoderConfig()
+                       .appendDefaultContentCharsetToContentTypeIfUndefined(false))).
+                formParam("key1", "value1").
+                formParam("key2", "value2").
+
                 log().all().
         when().
                 post("/post").
