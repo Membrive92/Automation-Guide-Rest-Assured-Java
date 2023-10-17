@@ -1,5 +1,8 @@
 package com.rest.files;
 
+import io.restassured.filter.log.LogDetail;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import org.testng.annotations.Test;
 
 import java.io.*;
@@ -41,5 +44,19 @@ public class Files {
         is.read(bytes);
         os.write(bytes);
         os.close();
+    }
+
+    @Test
+    public void loggingFile() throws FileNotFoundException {
+        PrintStream FileOutPutStream = new PrintStream(new File("src/main/resources/restAssured.log"));
+        given().
+                baseUri("https://postman-echo.com").
+                filter(new RequestLoggingFilter(LogDetail.BODY, FileOutPutStream)).
+                filter(new ResponseLoggingFilter(LogDetail.STATUS, FileOutPutStream)).
+                when().
+                get("/get").
+                then().
+                assertThat().
+                statusCode(200);
     }
 }
