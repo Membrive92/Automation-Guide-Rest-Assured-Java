@@ -19,9 +19,9 @@ public class Files {
                 multiPart("file", new File("src/main/resources/temp.txt")).
                 multiPart("attributes", attributes, "multipart/form-data").
                 log().all().
-                when().
+         when().
                 post("/post").
-                then().
+         then().
                 log().all().
                 assertThat().
                 statusCode(200);
@@ -53,9 +53,9 @@ public class Files {
                 baseUri("https://postman-echo.com").
                 filter(new RequestLoggingFilter(LogDetail.BODY, FileOutPutStream)).
                 filter(new ResponseLoggingFilter(LogDetail.STATUS, FileOutPutStream)).
-                when().
+        when().
                 get("/get").
-                then().
+        then().
                 assertThat().
                 statusCode(200);
     }
