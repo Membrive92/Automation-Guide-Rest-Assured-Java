@@ -1,5 +1,7 @@
 package com.rest.Pojo;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rest.pojo.simple.SimplePojo;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -12,6 +14,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class PojoExample {
@@ -53,10 +56,28 @@ public class PojoExample {
 
         given().
                 body(simplePojo).
-                when().
+        when().
                 post("/postSimpleJson").
-                then().spec(responseSpecification).
+        then().spec(responseSpecification).
                 body("key1", equalTo(simplePojo.getKey1()),
                         "key2", equalTo(simplePojo.getKey2()));
+    }
+    @Test
+    public void simple_pojo_example_Deserialization() throws JsonProcessingException {
+        SimplePojo simplePojo = new SimplePojo("value1", "value2");
+
+       SimplePojo deserializedPojo = given().
+                body(simplePojo).
+        when().
+                post("/postSimpleJson").
+        then().spec(responseSpecification).
+                extract().
+                response().
+                as(SimplePojo.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String deserializedPojoStr = objectMapper.writeValueAsString(deserializedPojo);
+        String simplePojoStr = objectMapper.writeValueAsString(simplePojo);
+        assertThat(objectMapper.readTree(deserializedPojoStr), equalTo(objectMapper.readTree(simplePojoStr)));
     }
 }
