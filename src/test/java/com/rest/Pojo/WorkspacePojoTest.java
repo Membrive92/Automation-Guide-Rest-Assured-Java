@@ -8,6 +8,7 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static com.rest.Utils.Utils.postmanApiKey;
@@ -33,9 +34,9 @@ public class WorkspacePojoTest {
         RestAssured.responseSpecification = responseSpecBuilder.build();
     }
 
-    @Test
-    public void validate_post_request_payload_as_map() {
-        Workspace workspace = new Workspace("myPojoWorkspace","personal","description");
+    @Test(dataProvider = "workspace")
+    public void workspace_serialize_deserialize(String name, String type, String description) {
+        Workspace workspace = new Workspace(name,type,description);
         WorkspaceRoot workspaceRoot = new WorkspaceRoot(workspace);
 
         WorkspaceRoot deserializedWorkSpaceRoot = given().
@@ -50,5 +51,13 @@ public class WorkspacePojoTest {
         assertThat(deserializedWorkSpaceRoot.getWorkspace().getName(),
                 equalTo(workspaceRoot.getWorkspace().getName()));
         assertThat(deserializedWorkSpaceRoot.getWorkspace().getId(), matchesPattern("^[a-z0-9-]{36}$"));
+    }
+
+    @DataProvider(name = "workspace")
+    public Object[][] getWorkspace(){
+        return new Object[][]{
+                {"workspaceDp", "personal", "description"},
+                {"workspaceDp2", "team", "description2"}
+        };
     }
 }
