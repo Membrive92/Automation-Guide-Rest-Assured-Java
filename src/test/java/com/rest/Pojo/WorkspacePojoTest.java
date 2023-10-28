@@ -11,6 +11,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
+
 import static com.rest.Utils.Utils.postmanApiKey;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -37,6 +39,8 @@ public class WorkspacePojoTest {
     @Test(dataProvider = "workspace")
     public void workspace_serialize_deserialize(String name, String type, String description) {
         Workspace workspace = new Workspace(name,type,description);
+        HashMap<String, String> myHashMap = new HashMap<String, String>();
+        workspace.setMyHashMap(myHashMap);
         WorkspaceRoot workspaceRoot = new WorkspaceRoot(workspace);
 
         WorkspaceRoot deserializedWorkSpaceRoot = given().
