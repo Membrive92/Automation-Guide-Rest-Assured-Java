@@ -1,7 +1,7 @@
 package com.rest.Pojo;
 
-import com.rest.pojo.workspace.Workspace;
-import com.rest.pojo.workspace.WorkspaceRoot;
+import pojo.workspace.Workspace;
+import pojo.workspace.WorkspaceRoot;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;

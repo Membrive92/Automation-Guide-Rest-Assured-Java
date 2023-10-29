@@ -1,4 +1,4 @@
-package com.rest.pojo.workspace;
+package pojo.workspace;
 
 public class WorkspaceRoot {
     Workspace workspace;

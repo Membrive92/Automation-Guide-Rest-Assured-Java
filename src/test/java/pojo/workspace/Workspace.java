@@ -1,4 +1,4 @@
-package com.rest.pojo.workspace;
+package pojo.workspace;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

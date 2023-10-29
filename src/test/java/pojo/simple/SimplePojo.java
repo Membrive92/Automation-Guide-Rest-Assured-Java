@@ -1,4 +1,4 @@
-package com.rest.pojo.simple;
+package pojo.simple;
 
 public class SimplePojo {
     private String key1;

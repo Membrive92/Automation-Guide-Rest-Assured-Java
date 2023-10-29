@@ -1,4 +1,4 @@
-package com.rest.pojo.ComplexLivePojo.collectionPojos;
+package com.rest.Pojo.ComplexLivePojo.CollectionPojos;
 
 import java.util.List;
 
