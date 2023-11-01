@@ -1,7 +1,10 @@
 package com.rest.Pojo.ComplexLivePojo.CollectionPojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Folder {
     private String name;
     List<RequestRoot> item;

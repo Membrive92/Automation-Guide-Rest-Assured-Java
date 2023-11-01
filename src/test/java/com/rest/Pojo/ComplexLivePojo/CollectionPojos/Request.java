@@ -1,9 +1,12 @@
 package com.rest.Pojo.ComplexLivePojo.CollectionPojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Request {
-    private String url;
+    private Object url;
     private String method;
     List<Header> header;
     Body body;
@@ -20,11 +23,11 @@ public class Request {
     public Request() {
     }
 
-    public String getUrl() {
+    public Object getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(Object url) {
         this.url = url;
     }
 

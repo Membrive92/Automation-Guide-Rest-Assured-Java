@@ -1,11 +1,20 @@
 package com.rest.Pojo.ComplexLivePojo.tests;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rest.Pojo.ComplexLivePojo.CollectionPojos.*;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.ResponseSpecification;
+import org.json.JSONException;
+import org.skyscreamer.jsonassert.Customization;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
+
+import org.skyscreamer.jsonassert.ValueMatcher;
+import org.skyscreamer.jsonassert.comparator.CustomComparator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -38,7 +47,7 @@ public class ComplexPojoTest {
     }
 
     @Test
-    public void complex_pojo_create_collection() {
+    public void complex_pojo_create_collection() throws JsonProcessingException, JSONException {
         Header header = new Header("Content-Type", "application/json");
         List<Header> headerList = new ArrayList<Header>();
         headerList.add(header);
@@ -53,7 +62,7 @@ public class ComplexPojoTest {
         requestRootList.add(requestRoot);
 
         Folder folder = new Folder("This is a folder", requestRootList);
-        List<Object> folderList = new ArrayList<Object>();
+        List<Folder> folderList = new ArrayList<Folder>();
         folderList.add(folder);
 
         Info info = new Info("Sample Collection1" , "This is just a sample collection"
@@ -62,10 +71,37 @@ public class ComplexPojoTest {
         Collection collection = new Collection(info, folderList);
         CollectionRoot collectionRoot = new CollectionRoot(collection);
 
-       given().
+    String collectionUid = given().
                 body(collectionRoot).
-       when().
+    when().
                 post("/collections").
-       then().spec(responseSpecification);
+    then().spec(responseSpecification).
+               extract().
+               response().
+               path("collection.uid");
+
+    CollectionRoot deserializedCollectionRoot = given().
+            pathParam("collectionUid", collectionUid).
+    when().
+            get("/collections/{collectionUid}").
+    then().spec(responseSpecification).
+            extract().
+            response().
+            as(CollectionRoot.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String collectionRootStr = objectMapper.writeValueAsString(collectionRoot);
+        String deserializedCollectionRootStr = objectMapper.writeValueAsString(deserializedCollectionRoot);
+
+
+        //Using JSONASSERT for compare full body
+        JSONAssert.assertEquals(collectionRootStr, deserializedCollectionRootStr,
+               new CustomComparator(JSONCompareMode.STRICT_ORDER,
+
+                       //Except require fields
+                       new Customization("collection.item[*].item[*].request.url" , new ValueMatcher<Object>() {
+                           public boolean equal(Object o1, Object o2){
+                               return true;
+                           }
+                       })) );
     }
 }

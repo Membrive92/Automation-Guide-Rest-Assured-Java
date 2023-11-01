@@ -1,5 +1,8 @@
 package com.rest.Pojo.ComplexLivePojo.CollectionPojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CollectionRoot {
     Collection collection;
 

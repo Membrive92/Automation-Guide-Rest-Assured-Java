@@ -10,5 +10,7 @@ Postman,
 https://reqres.in,
 https://github.com/appium-boneyard/sample-code/blob/master/sample-code/apps/ApiDemos/bin/ApiDemos-debug.apk,
 https://jsonschema.net/
+https://github.com/skyscreamer/JSONassert
+
 
 
