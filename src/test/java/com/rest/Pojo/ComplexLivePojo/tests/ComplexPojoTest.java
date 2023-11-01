@@ -3,6 +3,17 @@ package com.rest.Pojo.ComplexLivePojo.tests;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rest.Pojo.ComplexLivePojo.CollectionPojos.*;
+import com.rest.Pojo.ComplexLivePojo.CollectionPojos.Collection.CollectionBase;
+import com.rest.Pojo.ComplexLivePojo.CollectionPojos.Collection.CollectionRequest;
+import com.rest.Pojo.ComplexLivePojo.CollectionPojos.CollectionRoot.CollectionRootBase;
+import com.rest.Pojo.ComplexLivePojo.CollectionPojos.CollectionRoot.CollectionRootRequest;
+import com.rest.Pojo.ComplexLivePojo.CollectionPojos.CollectionRoot.CollectionRootResponse;
+import com.rest.Pojo.ComplexLivePojo.CollectionPojos.Folder.FolderBase;
+import com.rest.Pojo.ComplexLivePojo.CollectionPojos.Folder.FolderRequest;
+import com.rest.Pojo.ComplexLivePojo.CollectionPojos.Request.RequestBase;
+import com.rest.Pojo.ComplexLivePojo.CollectionPojos.Request.RequestRequest;
+import com.rest.Pojo.ComplexLivePojo.CollectionPojos.RequestRoot.RequestRootBase;
+import com.rest.Pojo.ComplexLivePojo.CollectionPojos.RequestRoot.RequestRootRequest;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -54,22 +65,22 @@ public class ComplexPojoTest {
 
         Body body = new Body("raw","{\"data\": \"123\"}");
 
-        Request request = new Request("https://postman-echo.com/post", "POST", headerList, body,
+        RequestRequest request = new RequestRequest("https://postman-echo.com/post", "POST", headerList, body,
                 "This is a sample post Request");
 
-        RequestRoot requestRoot = new RequestRoot("Sample POST Request", request);
-        List<RequestRoot> requestRootList = new ArrayList<RequestRoot>();
+        RequestRootRequest requestRoot = new RequestRootRequest("Sample POST Request", request);
+        List<RequestRootRequest> requestRootList = new ArrayList<RequestRootRequest>();
         requestRootList.add(requestRoot);
 
-        Folder folder = new Folder("This is a folder", requestRootList);
-        List<Folder> folderList = new ArrayList<Folder>();
+        FolderRequest folder = new FolderRequest("This is a folder", requestRootList);
+        List<FolderRequest> folderList = new ArrayList<FolderRequest>();
         folderList.add(folder);
 
         Info info = new Info("Sample Collection1" , "This is just a sample collection"
                 , "https://schema.getpostman.com/json/collection/v2.1.0/collection.json");
 
-        Collection collection = new Collection(info, folderList);
-        CollectionRoot collectionRoot = new CollectionRoot(collection);
+        CollectionRequest collection = new CollectionRequest(info, folderList);
+        CollectionRootRequest collectionRoot = new CollectionRootRequest(collection);
 
     String collectionUid = given().
                 body(collectionRoot).
@@ -80,14 +91,15 @@ public class ComplexPojoTest {
                response().
                path("collection.uid");
 
-    CollectionRoot deserializedCollectionRoot = given().
+    CollectionRootResponse deserializedCollectionRoot = given().
             pathParam("collectionUid", collectionUid).
     when().
             get("/collections/{collectionUid}").
     then().spec(responseSpecification).
             extract().
             response().
-            as(CollectionRoot.class);
+            as(CollectionRootResponse.class);
+
         ObjectMapper objectMapper = new ObjectMapper();
         String collectionRootStr = objectMapper.writeValueAsString(collectionRoot);
         String deserializedCollectionRootStr = objectMapper.writeValueAsString(deserializedCollectionRoot);
