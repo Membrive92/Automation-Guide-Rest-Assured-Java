@@ -7,23 +7,24 @@ import com.rest.Pojo.ComplexLivePojo.CollectionPojos.Header;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RequestRequest extends RequestBase {
+public class RequestRequest extends RequestBase{
     private String url;
+
+    public RequestRequest(){
+
+    }
+
     public RequestRequest(String url, String method, List<Header> header, Body body, String description) {
-        super(method,header,body,description);
+        super(method, header, body, description);
         this.url = url;
     }
 
-    public RequestRequest() {
-    }
 
-    public Object getUrl() {
+    public String getUrl() {
         return url;
     }
 
     public void setUrl(String url) {
         this.url = url;
     }
-
-
 }

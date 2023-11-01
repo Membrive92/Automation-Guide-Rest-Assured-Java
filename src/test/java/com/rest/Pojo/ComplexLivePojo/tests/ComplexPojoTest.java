@@ -3,17 +3,14 @@ package com.rest.Pojo.ComplexLivePojo.tests;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rest.Pojo.ComplexLivePojo.CollectionPojos.*;
-import com.rest.Pojo.ComplexLivePojo.CollectionPojos.Collection.CollectionBase;
 import com.rest.Pojo.ComplexLivePojo.CollectionPojos.Collection.CollectionRequest;
-import com.rest.Pojo.ComplexLivePojo.CollectionPojos.CollectionRoot.CollectionRootBase;
 import com.rest.Pojo.ComplexLivePojo.CollectionPojos.CollectionRoot.CollectionRootRequest;
 import com.rest.Pojo.ComplexLivePojo.CollectionPojos.CollectionRoot.CollectionRootResponse;
-import com.rest.Pojo.ComplexLivePojo.CollectionPojos.Folder.FolderBase;
 import com.rest.Pojo.ComplexLivePojo.CollectionPojos.Folder.FolderRequest;
-import com.rest.Pojo.ComplexLivePojo.CollectionPojos.Request.RequestBase;
+import com.rest.Pojo.ComplexLivePojo.CollectionPojos.Folder.FolderResponse;
 import com.rest.Pojo.ComplexLivePojo.CollectionPojos.Request.RequestRequest;
-import com.rest.Pojo.ComplexLivePojo.CollectionPojos.RequestRoot.RequestRootBase;
 import com.rest.Pojo.ComplexLivePojo.CollectionPojos.RequestRoot.RequestRootRequest;
+import com.rest.Pojo.ComplexLivePojo.CollectionPojos.RequestRoot.RequestRootResponse;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -37,6 +34,8 @@ import static com.rest.Utils.Utils.postmanApiKey;
 import static io.restassured.RestAssured.given;
 
 import static io.restassured.RestAssured.requestSpecification;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 
 public class ComplexPojoTest {
     ResponseSpecification responseSpecification;
@@ -65,7 +64,7 @@ public class ComplexPojoTest {
 
         Body body = new Body("raw","{\"data\": \"123\"}");
 
-        RequestRequest request = new RequestRequest("https://postman-echo.com/post", "POST", headerList, body,
+        RequestRequest request = new RequestRequest("https://postman-echo.com/post", "POST", headerList,body,
                 "This is a sample post Request");
 
         RequestRootRequest requestRoot = new RequestRootRequest("Sample POST Request", request);
@@ -115,5 +114,24 @@ public class ComplexPojoTest {
                                return true;
                            }
                        })) );
+
+        List<String> UrlRequestList = new ArrayList<>();
+        List<String> UrlResponseList = new ArrayList<>();
+
+        for (RequestRootRequest requestRootRequest:requestRootList){
+            UrlRequestList.add(requestRootRequest.getRequest().getUrl());
+        }
+
+        List<FolderResponse> folderResponseList = deserializedCollectionRoot.getCollection().getItem();
+        for (FolderResponse folderResponse: folderResponseList){
+            List<RequestRootResponse> requestRootResponseList = folderResponse.getItem();
+            for (RequestRootResponse requestRootResponse: requestRootResponseList){
+                URL url = requestRootResponse.getRequest().getUrl();
+                UrlResponseList.add(url.getRaw());
+
+            }
+        }
+
+        assertThat(UrlResponseList, containsInAnyOrder(UrlRequestList.toArray()));
     }
 }

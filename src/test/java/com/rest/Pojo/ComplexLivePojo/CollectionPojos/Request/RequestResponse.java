@@ -8,18 +8,19 @@ import com.rest.Pojo.ComplexLivePojo.CollectionPojos.URL;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RequestResponse extends RequestBase {
-    private URL url;
+public class RequestResponse extends RequestBase{
+    URL url;
+
+    public RequestResponse(){
+
+    }
 
     public RequestResponse(URL url, String method, List<Header> header, Body body, String description) {
-        super(method,header,body,description);
+        super(method, header, body, description);
         this.url = url;
     }
 
-    public RequestResponse() {
-    }
-
-    public Object getUrl() {
+    public URL getUrl() {
         return url;
     }
 
