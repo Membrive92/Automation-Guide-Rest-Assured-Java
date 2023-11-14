@@ -13,4 +13,7 @@ https://jsonschema.net/
 https://github.com/skyscreamer/JSONassert
 
 
+https://github.com/dangeabunea/RomanianCoderExamples    - Spring project for api testing
+
+
 
