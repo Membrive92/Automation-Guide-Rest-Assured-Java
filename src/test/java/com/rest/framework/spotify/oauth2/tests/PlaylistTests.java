@@ -40,10 +40,10 @@ public class PlaylistTests {
 
     @Test
     public void ShouldBeAbleToCreateAPlaylist(){
-        Playlist requestPlaylist = new Playlist();
-        requestPlaylist.setName("New Playlist");
-        requestPlaylist.setDescription("New playlist description");
-        requestPlaylist.setPublic(false);
+        Playlist requestPlaylist = new Playlist().
+                setName("New Playlist").
+                setDescription("New playlist description").
+                setPublic(false);
 
       Playlist responsePlaylist =  given(requestSpecification).
                 body(requestPlaylist).
@@ -61,10 +61,10 @@ public class PlaylistTests {
     }
     @Test
     public void ShouldBeAbleToGetAPlaylist(){
-        Playlist requestPlaylist = new Playlist();
-        requestPlaylist.setName("Update Playlist");
-        requestPlaylist.setDescription("New Update playlist description");
-        requestPlaylist.setPublic(false);
+        Playlist requestPlaylist = new Playlist().
+                setName("Update Playlist").
+                setDescription("New Update playlist description").
+                setPublic(false);
 
         Playlist responsePlaylist = given(requestSpecification).
         when().get("/playlists/2717aBVnB3oP3yncF6EJid").
@@ -82,10 +82,10 @@ public class PlaylistTests {
 
     @Test
     public void ShouldBeAbleToUpdateAPlaylist(){
-        Playlist requestPlaylist = new Playlist();
-        requestPlaylist.setName("Update Playlist");
-        requestPlaylist.setDescription("New Update playlist description");
-        requestPlaylist.setPublic(false);
+        Playlist requestPlaylist = new Playlist().
+                setName("Update Playlist").
+                setDescription("New Update playlist description").
+                setPublic(false);
 
         given(requestSpecification).
                 body(requestPlaylist).
@@ -97,10 +97,10 @@ public class PlaylistTests {
 
     @Test
     public void ShouldNotdBeAbleToCreateAPlaylist(){
-        Playlist requestPlaylist = new Playlist();
-        requestPlaylist.setName("");
-        requestPlaylist.setDescription("New playlist description");
-        requestPlaylist.setPublic(false);
+        Playlist requestPlaylist = new Playlist().
+                setName("").
+                setDescription("New playlist description").
+                setPublic(false);
 
       Error error =  given(requestSpecification).
                 body(requestPlaylist).
@@ -118,10 +118,10 @@ public class PlaylistTests {
 
     @Test
     public void ShouldNotdBeAbleToCreateAPlaylistWithExpiredToken(){
-        Playlist requestPlaylist = new Playlist();
-        requestPlaylist.setName("New Playlist");
-        requestPlaylist.setDescription("New playlist description");
-        requestPlaylist.setPublic(false);
+        Playlist requestPlaylist = new Playlist().
+                setName("New Playlist").
+                setDescription("New playlist description").
+                setPublic(false);
 
         Error error = given().
                 baseUri("https://api.spotify.com").
