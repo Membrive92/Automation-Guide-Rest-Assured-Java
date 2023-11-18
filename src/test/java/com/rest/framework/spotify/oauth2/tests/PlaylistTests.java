@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class PlaylistTests {
     RequestSpecification requestSpecification;
     ResponseSpecification responseSpecification;
-    String access_token = "BQCM7MfwqIUaXpSWoeN-CYu4T0UFynqv24fprVFwjugUy-xWBJiSya8Z5-sK_igsGTClyTkIbO43dSmI3z-3oaFse-WM85ZO7ZteyHuDIfgdJslDtZjOahfQOqD7tUdjVRuapKGtSNYxZ87g8tSaNbKuZYjQaZIAUs-MoM9Sl_GQb6yV2VM3woyP5jPXsk72iAwh8aVfyh82ZjogFK7ZB-rbtlRmUr8i-56kfSbLqAmSrFOhpc67BkdgzxrMStR1-jXgS92OYWWynX17";
+    String access_token = "BQCNNqixBg2oEQJgjcLIqJjUhOl46XES8XHpAKgGVIdqRvUGS7fpSEZsPZx1LwN-C9SVaPBQr_Nteq4TliJ861EWC0bdI_A9NNuNfee_zZ6WzY_kYjebTaUyqNFA8r_uGtSdD6K4NMbX6xXD-C58o7jNX2UtXawX0v8c9uVAU6crTb3p8s_zZ5kahKLK3zpcXJbfyDV2YysGOX8dLqxNg5WnwpgKSV3-vwSX6aWUWdLUljzkoPKJ3Jzzyye_Ba-gUcPvVYTiOcWG3frE";
 
     @BeforeClass
     public void beforeClass() {
@@ -80,5 +80,46 @@ public class PlaylistTests {
         then().spec(responseSpecification).
                 assertThat().
                 statusCode(200);
+    }
+
+    @Test
+    public void ShouldNotdBeAbleToCreateAPlaylist(){
+        String payload = "{\n" +
+                "\"name\": \"\",\n" +
+                "\"description\": \"New playlist description\",\n" +
+                "\"public\": true\n" +
+                "}";
+
+        given(requestSpecification).
+                body(payload).
+        when().post("/users/31n4n3stwzbz5csjh7mycjbppehi/playlists").
+        then().spec(responseSpecification).
+                assertThat().
+                statusCode(400).
+                body("error.status", equalTo(400),
+                        "error.message", equalTo("Missing required field: name"));
+    }
+
+    @Test
+    public void ShouldNotdBeAbleToCreateAPlaylistWithExpiredToken(){
+        String payload = "{\n" +
+                "\"name\": \"New Playlist\",\n" +
+                "\"description\": \"New playlist description\",\n" +
+                "\"public\": true\n" +
+                "}";
+
+        given().
+                baseUri("https://api.spotify.com").
+                basePath("/v1").
+                header("Authorization", "Bearer 123345").
+                contentType(ContentType.JSON).
+                log().all().
+                body(payload).
+        when().post("/users/31n4n3stwzbz5csjh7mycjbppehi/playlists").
+        then().spec(responseSpecification).
+                assertThat().
+                statusCode(401).
+                body("error.status", equalTo(401),
+                        "error.message", equalTo("Invalid access token"));
     }
 }
