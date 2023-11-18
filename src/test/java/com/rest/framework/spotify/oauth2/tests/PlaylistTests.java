@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class PlaylistTests {
     RequestSpecification requestSpecification;
     ResponseSpecification responseSpecification;
-    String access_token = "BQD_TSCStLKMSh0neB9eVlPqLoUuN2XB8M36-tdqf6wQGsGDRVZXiUQkj96LFdOoeR-aA1Rqyn6FvOUfm85F3e3cMNMB5mNns5nXpM-cjQRbwcC4UiZHbS0sKLODJzN7WiAjp20OhN-4gdjDO9o3abftg_u14HtgRo5qNWciK-aKsdIuiT5CpThVSUxO0FANvFuma33H98mDyq2UnQiRsgzUOR8OtPQ02FVoCmEiAcMP5EThnuKNc9gpYBzrKX1OtkkYtBME4fQG20Ft";
+    String access_token = "BQCM7MfwqIUaXpSWoeN-CYu4T0UFynqv24fprVFwjugUy-xWBJiSya8Z5-sK_igsGTClyTkIbO43dSmI3z-3oaFse-WM85ZO7ZteyHuDIfgdJslDtZjOahfQOqD7tUdjVRuapKGtSNYxZ87g8tSaNbKuZYjQaZIAUs-MoM9Sl_GQb6yV2VM3woyP5jPXsk72iAwh8aVfyh82ZjogFK7ZB-rbtlRmUr8i-56kfSbLqAmSrFOhpc67BkdgzxrMStR1-jXgS92OYWWynX17";
 
     @BeforeClass
     public void beforeClass() {
@@ -32,7 +32,6 @@ public class PlaylistTests {
         requestSpecification = requestSpecBuilder.build();
 
         ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder().
-                expectContentType(ContentType.JSON).
                 log(LogDetail.ALL);
         responseSpecification = responseSpecBuilder.build();
     }
@@ -54,5 +53,32 @@ public class PlaylistTests {
                 body("name", equalTo("JoseApiTst"),
                         "description", equalTo("New playlist description"),
                         "public", equalTo(true));
+    }
+    @Test
+    public void ShouldBeAbleToGetAPlaylist(){
+        given(requestSpecification).
+        when().get("/playlists/2717aBVnB3oP3yncF6EJid").
+        then().spec(responseSpecification).
+                assertThat().
+                statusCode(200).
+                body("name", equalTo("Updated Playlist Name"),
+                        "description", equalTo("Updated playlist description"),
+                        "public", equalTo(false));
+    }
+
+    @Test
+    public void ShouldBeAbleToUpdateAPlaylist(){
+        String payload = "{\n" +
+                "    \"name\": \"Updated Playlist Name auto\",\n" +
+                "    \"description\": \"Updated playlist auto description\",\n" +
+                "    \"public\": false\n" +
+                "}";
+
+        given(requestSpecification).
+                body(payload).
+        when().put("/playlists/2717aBVnB3oP3yncF6EJid").
+        then().spec(responseSpecification).
+                assertThat().
+                statusCode(200);
     }
 }
