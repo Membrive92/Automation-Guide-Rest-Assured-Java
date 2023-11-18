@@ -14,6 +14,7 @@ https://github.com/skyscreamer/JSONassert
 
 
 https://github.com/dangeabunea/RomanianCoderExamples    - Spring project for api testing
+https://www.jsonschema2pojo.org - used for create pojo classes based on api jsons
 
 
 
