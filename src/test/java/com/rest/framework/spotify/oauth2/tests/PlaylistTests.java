@@ -1,15 +1,11 @@
 package com.rest.framework.spotify.oauth2.tests;
 
+import com.rest.framework.spotify.oauth2.api.applicationApi.PlaylistApi;
 import com.rest.framework.spotify.oauth2.pojo.Error;
 import com.rest.framework.spotify.oauth2.pojo.Playlist;
-
-import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
-
-import static com.rest.framework.spotify.oauth2.api.SpecBuilder.getRequestSpec;
-import static com.rest.framework.spotify.oauth2.api.SpecBuilder.getResponseSpec;
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -22,19 +18,14 @@ public class PlaylistTests {
                 setDescription("New playlist description").
                 setPublic(false);
 
-      Playlist responsePlaylist = given(getRequestSpec()).
-                body(requestPlaylist).
-        when().post("/users/31n4n3stwzbz5csjh7mycjbppehi/playlists").
-        then().spec(getResponseSpec()).
-                assertThat().
-                statusCode(201).
-                extract().
-                response().
-                as(Playlist.class);
+      Response response = PlaylistApi.post(requestPlaylist);
+      assertThat(response.statusCode(), equalTo(201));
 
-        assertThat(responsePlaylist.getName(), equalTo(requestPlaylist.getName()));
-        assertThat(responsePlaylist.getDescription(), equalTo(requestPlaylist.getDescription()));
-        assertThat(responsePlaylist.getPublic(), equalTo(requestPlaylist.getPublic()));
+      Playlist responsePlaylist = response.as(Playlist.class);
+
+      assertThat(responsePlaylist.getName(), equalTo(requestPlaylist.getName()));
+      assertThat(responsePlaylist.getDescription(), equalTo(requestPlaylist.getDescription()));
+      assertThat(responsePlaylist.getPublic(), equalTo(requestPlaylist.getPublic()));
     }
 
     @Test
@@ -44,14 +35,10 @@ public class PlaylistTests {
                 setDescription("New Update playlist description").
                 setPublic(false);
 
-        Playlist responsePlaylist = given(getRequestSpec()).
-        when().get("/playlists/2717aBVnB3oP3yncF6EJid").
-        then().spec(getResponseSpec()).
-                assertThat().
-                statusCode(200).
-                extract().
-                response().
-                as(Playlist.class);
+        Response response = PlaylistApi.get("2717aBVnB3oP3yncF6EJid");
+        assertThat(response.statusCode(), equalTo(200));
+
+        Playlist responsePlaylist = response.as(Playlist.class);
 
         assertThat(responsePlaylist.getName(), equalTo(requestPlaylist.getName()));
         assertThat(responsePlaylist.getDescription(), equalTo(requestPlaylist.getDescription()));
@@ -65,12 +52,8 @@ public class PlaylistTests {
                 setDescription("New Update playlist description").
                 setPublic(false);
 
-        given(getRequestSpec()).
-                body(requestPlaylist).
-        when().put("/playlists/2717aBVnB3oP3yncF6EJid").
-        then().spec(getResponseSpec()).
-                assertThat().
-                statusCode(200);
+        Response response = PlaylistApi.put("2717aBVnB3oP3yncF6EJid",requestPlaylist);
+        assertThat(response.statusCode(), equalTo(200));
     }
 
     @Test
@@ -80,15 +63,10 @@ public class PlaylistTests {
                 setDescription("New playlist description").
                 setPublic(false);
 
-      Error error = given(getRequestSpec()).
-                body(requestPlaylist).
-        when().post("/users/31n4n3stwzbz5csjh7mycjbppehi/playlists").
-        then().spec(getResponseSpec()).
-                assertThat().
-                statusCode(400).
-                extract().
-                response().
-                as(Error.class);
+        Response response = PlaylistApi.post(requestPlaylist);
+        assertThat(response.statusCode(), equalTo(400));
+
+        Error error = response.as(Error.class);
 
         assertThat(error.getError().getStatus(), equalTo(400));
         assertThat(error.getError().getMessage(), equalTo("Missing required field: name"));
@@ -96,25 +74,16 @@ public class PlaylistTests {
 
     @Test
     public void ShouldNotdBeAbleToCreateAPlaylistWithExpiredToken(){
+        String invalidToken = "12345";
         Playlist requestPlaylist = new Playlist().
                 setName("New Playlist").
                 setDescription("New playlist description").
                 setPublic(false);
 
-        Error error = given().
-                baseUri("https://api.spotify.com").
-                basePath("/v1").
-                header("Authorization", "Bearer 123345").
-                contentType(ContentType.JSON).
-                log().all().
-                body(requestPlaylist).
-        when().post("/users/31n4n3stwzbz5csjh7mycjbppehi/playlists").
-        then().spec(getResponseSpec()).
-                assertThat().
-                statusCode(401).
-                extract().
-                response().
-                as(Error.class);
+        Response response = PlaylistApi.post(invalidToken,requestPlaylist);
+        assertThat(response.statusCode(), equalTo(401));
+
+        Error error = response.as(Error.class);
 
         assertThat(error.getError().getStatus(), equalTo(401));
         assertThat(error.getError().getMessage(), equalTo("Invalid access token"));
