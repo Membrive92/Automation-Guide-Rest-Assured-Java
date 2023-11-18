@@ -3,40 +3,17 @@ package com.rest.framework.spotify.oauth2.tests;
 import com.rest.framework.spotify.oauth2.pojo.Error;
 import com.rest.framework.spotify.oauth2.pojo.Playlist;
 
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
+import static com.rest.framework.spotify.oauth2.api.SpecBuilder.getRequestSpec;
+import static com.rest.framework.spotify.oauth2.api.SpecBuilder.getResponseSpec;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class PlaylistTests {
-    RequestSpecification requestSpecification;
-    ResponseSpecification responseSpecification;
-    String access_token = "BQA7g8ftGchM6tq84uUKFzCcOQ9_ErfcEcJ336H4PB9i5zXQ5vqW4mRoKtj51W2FGZF_I3ZYE32Kg9ovzo98hlUzJqvcLAUmscvawVBzqTxDfUKsiv22vewtbDr3gpe0gd8f9jzF-LpfZT6TfAdbZAb1NOm7HqGx5XtMTCEb2Ninl7y9r1K-jnGmjvE31uihGOEWy8Fq1x2hrfNnpWo_LK1Qktffu4YsSERK0GE_0BILpixjLWeCLvmiziPj7J9UTW6sdScRwnCfeB2A";
-
-    @BeforeClass
-    public void beforeClass() {
-        RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder().
-            setBaseUri("https://api.spotify.com").
-            setBasePath("/v1").
-            addHeader("Authorization", "Bearer "+ access_token).
-                    setContentType(ContentType.JSON).
-                    log(LogDetail.ALL);
-
-        requestSpecification = requestSpecBuilder.build();
-
-        ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder().
-                log(LogDetail.ALL);
-        responseSpecification = responseSpecBuilder.build();
-    }
 
     @Test
     public void ShouldBeAbleToCreateAPlaylist(){
@@ -45,10 +22,10 @@ public class PlaylistTests {
                 setDescription("New playlist description").
                 setPublic(false);
 
-      Playlist responsePlaylist =  given(requestSpecification).
+      Playlist responsePlaylist = given(getRequestSpec()).
                 body(requestPlaylist).
         when().post("/users/31n4n3stwzbz5csjh7mycjbppehi/playlists").
-        then().spec(responseSpecification).
+        then().spec(getResponseSpec()).
                 assertThat().
                 statusCode(201).
                 extract().
@@ -59,6 +36,7 @@ public class PlaylistTests {
         assertThat(responsePlaylist.getDescription(), equalTo(requestPlaylist.getDescription()));
         assertThat(responsePlaylist.getPublic(), equalTo(requestPlaylist.getPublic()));
     }
+
     @Test
     public void ShouldBeAbleToGetAPlaylist(){
         Playlist requestPlaylist = new Playlist().
@@ -66,9 +44,9 @@ public class PlaylistTests {
                 setDescription("New Update playlist description").
                 setPublic(false);
 
-        Playlist responsePlaylist = given(requestSpecification).
+        Playlist responsePlaylist = given(getRequestSpec()).
         when().get("/playlists/2717aBVnB3oP3yncF6EJid").
-        then().spec(responseSpecification).
+        then().spec(getResponseSpec()).
                 assertThat().
                 statusCode(200).
                 extract().
@@ -87,10 +65,10 @@ public class PlaylistTests {
                 setDescription("New Update playlist description").
                 setPublic(false);
 
-        given(requestSpecification).
+        given(getRequestSpec()).
                 body(requestPlaylist).
         when().put("/playlists/2717aBVnB3oP3yncF6EJid").
-        then().spec(responseSpecification).
+        then().spec(getResponseSpec()).
                 assertThat().
                 statusCode(200);
     }
@@ -102,10 +80,10 @@ public class PlaylistTests {
                 setDescription("New playlist description").
                 setPublic(false);
 
-      Error error =  given(requestSpecification).
+      Error error = given(getRequestSpec()).
                 body(requestPlaylist).
         when().post("/users/31n4n3stwzbz5csjh7mycjbppehi/playlists").
-        then().spec(responseSpecification).
+        then().spec(getResponseSpec()).
                 assertThat().
                 statusCode(400).
                 extract().
@@ -131,7 +109,7 @@ public class PlaylistTests {
                 log().all().
                 body(requestPlaylist).
         when().post("/users/31n4n3stwzbz5csjh7mycjbppehi/playlists").
-        then().spec(responseSpecification).
+        then().spec(getResponseSpec()).
                 assertThat().
                 statusCode(401).
                 extract().
