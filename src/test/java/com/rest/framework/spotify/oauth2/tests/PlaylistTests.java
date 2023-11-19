@@ -5,10 +5,7 @@ import com.rest.framework.spotify.oauth2.api.applicationApi.PlaylistApi;
 import com.rest.framework.spotify.oauth2.pojo.Error;
 import com.rest.framework.spotify.oauth2.pojo.Playlist;
 import com.rest.framework.spotify.oauth2.utils.DataLoader;
-import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Link;
-import io.qameta.allure.TmsLink;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -18,8 +15,11 @@ import static com.rest.framework.spotify.oauth2.api.Assert.assertError;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+@Epic("Spotify Oauth 2.0")
+@Feature("Playlist API")
 public class PlaylistTests {
 
+    @Story("Create a playlist story")
     @Link("https://example.org")
     @Link(name = "allure", type = "mylink")
     @TmsLink("Test manager system")
@@ -33,6 +33,7 @@ public class PlaylistTests {
       Assert.assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
     }
 
+    @Story("Get a playlist story")
     @Link("https://example.org")
     @Link(name = "allure", type = "mylink")
     @TmsLink("Test manager system")
@@ -46,6 +47,7 @@ public class PlaylistTests {
         Assert.assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
     }
 
+    @Story("Update a playlist story")
     @Link("https://example.org")
     @Link(name = "allure", type = "mylink")
     @TmsLink("Test manager system")
@@ -58,6 +60,7 @@ public class PlaylistTests {
         Assert.assertStatusCode(response.statusCode(), 200);
     }
 
+    @Story("Negative create a playlist story")
     @Link("https://example.org")
     @Link(name = "allure", type = "mylink")
     @TmsLink("Test manager system")
@@ -71,6 +74,7 @@ public class PlaylistTests {
         assertError(response.as(Error.class),400,"Missing required field: name");
     }
 
+    @Story("Negative Create a playlist story with expire token")
     @Link("https://example.org")
     @Link(name = "allure", type = "mylink")
     @TmsLink("Test manager system")
