@@ -6,6 +6,9 @@ import com.rest.framework.spotify.oauth2.pojo.Error;
 import com.rest.framework.spotify.oauth2.pojo.Playlist;
 import com.rest.framework.spotify.oauth2.utils.DataLoader;
 import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Link;
+import io.qameta.allure.TmsLink;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -17,6 +20,10 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class PlaylistTests {
 
+    @Link("https://example.org")
+    @Link(name = "allure", type = "mylink")
+    @TmsLink("Test manager system")
+    @Issue("Bug 12334")
     @Description("Create a playlist with  New Playlist name")
     @Test(description = "should be able to create a playlist")
     public void ShouldBeAbleToCreateAPlaylist() throws FileNotFoundException {
@@ -26,6 +33,10 @@ public class PlaylistTests {
       Assert.assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
     }
 
+    @Link("https://example.org")
+    @Link(name = "allure", type = "mylink")
+    @TmsLink("Test manager system")
+    @Issue("Bug 12334")
     @Description("Get a specific playlist")
     @Test(description = "should be able to get a playlist")
     public void ShouldBeAbleToGetAPlaylist() throws FileNotFoundException {
@@ -35,6 +46,10 @@ public class PlaylistTests {
         Assert.assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
     }
 
+    @Link("https://example.org")
+    @Link(name = "allure", type = "mylink")
+    @TmsLink("Test manager system")
+    @Issue("Bug 12334")
     @Description("Update a playlist with Update Playlist name")
     @Test(description = "should be able to update a playlist")
     public void ShouldBeAbleToUpdateAPlaylist() throws FileNotFoundException {
@@ -43,6 +58,10 @@ public class PlaylistTests {
         Assert.assertStatusCode(response.statusCode(), 200);
     }
 
+    @Link("https://example.org")
+    @Link(name = "allure", type = "mylink")
+    @TmsLink("Test manager system")
+    @Issue("Bug 12334")
     @Description("Check that playlist should not be create with empty name")
     @Test(description = "should not be able to create a playlist")
     public void ShouldNotdBeAbleToCreateAPlaylist() throws FileNotFoundException {
@@ -52,6 +71,10 @@ public class PlaylistTests {
         assertError(response.as(Error.class),400,"Missing required field: name");
     }
 
+    @Link("https://example.org")
+    @Link(name = "allure", type = "mylink")
+    @TmsLink("Test manager system")
+    @Issue("Bug 12334")
     @Description("Check that playlist should not be create with a expired token")
     @Test(description = "should not be  able to create a playlist with expired token")
     public void ShouldNotdBeAbleToCreateAPlaylistWithExpiredToken() throws FileNotFoundException {
