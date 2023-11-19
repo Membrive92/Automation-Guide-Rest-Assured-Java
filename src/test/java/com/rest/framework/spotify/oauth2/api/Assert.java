@@ -10,7 +10,7 @@ public class Assert {
     public static void assertPlaylistEqual(Playlist responsePlaylist, Playlist requestPlaylist){
         assertThat(responsePlaylist.getName(), equalTo(requestPlaylist.getName()));
         assertThat(responsePlaylist.getDescription(), equalTo(requestPlaylist.getDescription()));
-        assertThat(responsePlaylist.getPublic(), equalTo(requestPlaylist.getPublic()));
+        assertThat(responsePlaylist.get_public(), equalTo(requestPlaylist.get_public()));
     }
 
     public static void assertStatusCode(int actualStatusCode, int expectedStatusCode){
