@@ -16,13 +16,13 @@ public class Assert {
     }
 
     @Step
-    public static void assertStatusCode(int actualStatusCode, int expectedStatusCode){
-        assertThat(actualStatusCode, equalTo(expectedStatusCode));
+    public static void assertStatusCode(int actualStatusCode, StatusCodes statusCodes){
+        assertThat(actualStatusCode, equalTo(statusCodes.code));
     }
 
     @Step
-    public static void assertError(Error responseError, int expectedStatusCode, String expectedMsg){
-        assertThat(responseError.getError().getStatus(), equalTo(expectedStatusCode));
-        assertThat(responseError.getError().getMessage(), equalTo(expectedMsg));
+    public static void assertError(Error responseError, StatusCodes statusCodes){
+        assertThat(responseError.getError().getStatus(), equalTo(statusCodes.code));
+        assertThat(responseError.getError().getMessage(), equalTo(statusCodes.msg));
     }
 }

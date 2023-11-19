@@ -1,6 +1,7 @@
 package com.rest.framework.spotify.oauth2.tests;
 
 import com.rest.framework.spotify.oauth2.api.Assert;
+import com.rest.framework.spotify.oauth2.api.StatusCodes;
 import com.rest.framework.spotify.oauth2.api.applicationApi.PlaylistApi;
 import com.rest.framework.spotify.oauth2.pojo.Error;
 import com.rest.framework.spotify.oauth2.pojo.Playlist;
@@ -31,7 +32,7 @@ public class PlaylistTests {
     public void ShouldBeAbleToCreateAPlaylist() throws FileNotFoundException {
       Playlist requestPlaylist = new Playlist(generateName(),generateDescription(), false);
       Response response = PlaylistApi.post(requestPlaylist);
-      Assert.assertStatusCode(response.statusCode(), 201);
+      Assert.assertStatusCode(response.statusCode(), StatusCodes.CODE_201);
       Assert.assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
     }
 
@@ -43,9 +44,9 @@ public class PlaylistTests {
     @Description("Get a specific playlist")
     @Test(description = "should be able to get a playlist")
     public void ShouldBeAbleToGetAPlaylist() throws FileNotFoundException {
-        Playlist requestPlaylist = new Playlist("Update Playlist","New Update playlist description", false);
+        Playlist requestPlaylist = new Playlist("New Playlist","New playlist description", false);
         Response response = PlaylistApi.get(DataLoader.getInstance().getGetPlaylistId());
-        Assert.assertStatusCode(response.statusCode(), 200);
+        Assert.assertStatusCode(response.statusCode(), StatusCodes.CODE_200);
         Assert.assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
     }
 
@@ -57,9 +58,9 @@ public class PlaylistTests {
     @Description("Update a playlist with Update Playlist name")
     @Test(description = "should be able to update a playlist")
     public void ShouldBeAbleToUpdateAPlaylist() throws FileNotFoundException {
-        Playlist requestPlaylist = new Playlist(generateName(),generateDescription(), false);;
+        Playlist requestPlaylist = new Playlist(generateName(),generateDescription(), false);
         Response response = PlaylistApi.put(DataLoader.getInstance().getUpdatePlaylistId(), requestPlaylist);
-        Assert.assertStatusCode(response.statusCode(), 200);
+        Assert.assertStatusCode(response.statusCode(), StatusCodes.CODE_200);
     }
 
     @Story("Negative create a playlist story")
@@ -72,8 +73,8 @@ public class PlaylistTests {
     public void ShouldNotdBeAbleToCreateAPlaylist() throws FileNotFoundException {
         Playlist requestPlaylist = new Playlist("",generateDescription(), false);
         Response response = PlaylistApi.post(requestPlaylist);
-        Assert.assertStatusCode(response.statusCode(), 400);
-        assertError(response.as(Error.class),400,"Missing required field: name");
+        Assert.assertStatusCode(response.statusCode(), StatusCodes.CODE_400);
+        assertError(response.as(Error.class),StatusCodes.CODE_400);
     }
 
     @Story("Negative Create a playlist story with expire token")
@@ -87,7 +88,7 @@ public class PlaylistTests {
         String invalidToken = "12345";
         Playlist requestPlaylist = new Playlist(generateName(),generateDescription(), false);
         Response response = PlaylistApi.post(invalidToken,requestPlaylist);
-        assertThat(response.statusCode(), equalTo(401));
-        assertError(response.as(Error.class),401,"Invalid access token");
+        Assert.assertStatusCode(response.statusCode(), StatusCodes.CODE_401);
+        assertError(response.as(Error.class),StatusCodes.CODE_401);
     }
 }
