@@ -3,6 +3,7 @@ package com.rest.framework.spotify.oauth2.tests;
 import com.rest.framework.spotify.oauth2.api.applicationApi.PlaylistApi;
 import com.rest.framework.spotify.oauth2.pojo.Error;
 import com.rest.framework.spotify.oauth2.pojo.Playlist;
+import com.rest.framework.spotify.oauth2.utils.DataLoader;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -31,13 +32,13 @@ public class PlaylistTests {
     }
 
     @Test
-    public void ShouldBeAbleToGetAPlaylist(){
+    public void ShouldBeAbleToGetAPlaylist() throws FileNotFoundException {
         Playlist requestPlaylist = new Playlist().
                 setName("Update Playlist").
                 setDescription("New Update playlist description").
                 setPublic(false);
 
-        Response response = PlaylistApi.get("2717aBVnB3oP3yncF6EJid");
+        Response response = PlaylistApi.get(DataLoader.getInstance().getGetPlaylistId());
         assertThat(response.statusCode(), equalTo(200));
 
         Playlist responsePlaylist = response.as(Playlist.class);
@@ -48,13 +49,13 @@ public class PlaylistTests {
     }
 
     @Test
-    public void ShouldBeAbleToUpdateAPlaylist(){
+    public void ShouldBeAbleToUpdateAPlaylist() throws FileNotFoundException {
         Playlist requestPlaylist = new Playlist().
                 setName("Update Playlist").
                 setDescription("New Update playlist description").
                 setPublic(false);
 
-        Response response = PlaylistApi.put("2717aBVnB3oP3yncF6EJid",requestPlaylist);
+        Response response = PlaylistApi.put(DataLoader.getInstance().getUpdatePlaylistId(), requestPlaylist);
         assertThat(response.statusCode(), equalTo(200));
     }
 
