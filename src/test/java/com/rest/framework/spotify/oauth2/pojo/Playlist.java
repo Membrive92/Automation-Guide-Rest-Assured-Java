@@ -9,6 +9,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Playlist {
 
+    public Playlist(){}
+
+    public Playlist( String name, String description,  Boolean _public) {
+        this.description = description;
+        this.name = name;
+        this._public = _public;
+    }
+
+
     @JsonProperty("collaborative")
     private Boolean collaborative;
     @JsonProperty("description")
