@@ -1,8 +1,10 @@
 package com.rest.framework.spotify.oauth2.api;
 
+import com.rest.framework.spotify.oauth2.utils.ConfigLoader;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
+import java.io.FileNotFoundException;
 import java.time.Instant;
 import java.util.HashMap;
 
@@ -31,12 +33,12 @@ public class TokenManager {
         return access_token;
     }
 
-    private static Response renewToken(){
+    private static Response renewToken() throws FileNotFoundException {
         HashMap<String,String> formParams = new HashMap<String,String>();
-        formParams.put("client_id","06411ea52590448a86e5f5dab0b5b857");
-        formParams.put("client_secret","85d0cbfa9ebf47968fc799a2e0e88e9b");
-        formParams.put("refresh_token","AQDMbU1ipH0cgClkxlbxCACw36kntG5_N2g4ZL7v7g5oNcS6tnFyDWBaiJf4jdLJQfPdCLNzc_3EFdD64FpqCu1KiMYtNeCpWCGvTEp_tIQ1K6eiAwt74Qs3jB_IHfEyf3c");
-        formParams.put("grant_type","refresh_token");
+        formParams.put("client_id", ConfigLoader.getInstance().getClientId());
+        formParams.put("client_secret",ConfigLoader.getInstance().getClientSecret());
+        formParams.put("refresh_token",ConfigLoader.getInstance().getRefreshToken());
+        formParams.put("grant_type",ConfigLoader.getInstance().getGrantType());
 
         Response response = RestBase.postAccount(formParams);
 

@@ -6,13 +6,15 @@ import com.rest.framework.spotify.oauth2.pojo.Playlist;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
+import java.io.FileNotFoundException;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class PlaylistTests {
 
     @Test
-    public void ShouldBeAbleToCreateAPlaylist(){
+    public void ShouldBeAbleToCreateAPlaylist() throws FileNotFoundException {
         Playlist requestPlaylist = new Playlist().
                 setName("New Playlist").
                 setDescription("New playlist description").
@@ -57,7 +59,7 @@ public class PlaylistTests {
     }
 
     @Test
-    public void ShouldNotdBeAbleToCreateAPlaylist(){
+    public void ShouldNotdBeAbleToCreateAPlaylist() throws FileNotFoundException {
         Playlist requestPlaylist = new Playlist().
                 setName("").
                 setDescription("New playlist description").
@@ -73,7 +75,7 @@ public class PlaylistTests {
     }
 
     @Test
-    public void ShouldNotdBeAbleToCreateAPlaylistWithExpiredToken(){
+    public void ShouldNotdBeAbleToCreateAPlaylistWithExpiredToken() throws FileNotFoundException {
         String invalidToken = "12345";
         Playlist requestPlaylist = new Playlist().
                 setName("New Playlist").
