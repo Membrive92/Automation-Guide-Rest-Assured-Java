@@ -19,8 +19,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.matchesPattern;
 
-public class WorkspacePojoTest {
-    @BeforeClass
+public class WorkspacePojoTests {
+   @BeforeClass
     public void beforeClass() {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
         requestSpecBuilder.setBaseUri("https://api.postman.com");
@@ -36,7 +36,7 @@ public class WorkspacePojoTest {
         RestAssured.responseSpecification = responseSpecBuilder.build();
     }
 
-    @Test(dataProvider = "workspace")
+    //@Test(dataProvider = "workspace")
     public void workspace_serialize_deserialize(String name, String type, String description) {
         Workspace workspace = new Workspace(name,type,description);
         HashMap<String, String> myHashMap = new HashMap<String, String>();

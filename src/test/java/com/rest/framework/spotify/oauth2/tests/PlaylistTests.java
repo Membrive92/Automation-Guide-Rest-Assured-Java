@@ -15,12 +15,10 @@ import java.io.FileNotFoundException;
 import static com.rest.framework.spotify.oauth2.api.Assert.assertError;
 import static com.rest.framework.spotify.oauth2.utils.FakerUtils.generateDescription;
 import static com.rest.framework.spotify.oauth2.utils.FakerUtils.generateName;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 
 @Epic("Spotify Oauth 2.0")
 @Feature("Playlist API")
-public class PlaylistTests {
+public class PlaylistTests extends BaseTest {
 
     @Story("Create a playlist story")
     @Link("https://example.org")
