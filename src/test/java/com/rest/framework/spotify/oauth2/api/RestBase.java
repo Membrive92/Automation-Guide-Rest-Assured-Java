@@ -16,8 +16,8 @@ public class RestBase {
     @Step
     public static Response post(String path, String token, Object requestPlaylist){
         return given(getRequestSpec()).
-                body(requestPlaylist).
-                header("Authorization", "Bearer "+ token).
+               body(requestPlaylist).
+               auth().oauth2(token).
         when().post(path).
         then().spec(getResponseSpec()).
                 extract().
@@ -37,7 +37,7 @@ public class RestBase {
     @Step
     public static Response get(String path, String token){
         return given(getRequestSpec()).
-                header("Authorization", "Bearer "+ token).
+               auth().oauth2(token).
         when().get(path).
         then().spec(getResponseSpec()).
                 extract().
@@ -47,8 +47,8 @@ public class RestBase {
     @Step
     public static Response put(String path, String token, Object requestPlaylist){
        return given(getRequestSpec()).
-                header("Authorization", "Bearer "+ token).
-                body(requestPlaylist).
+              auth().oauth2(token).
+              body(requestPlaylist).
        when().put(path).
        then().spec(getResponseSpec()).
                 extract().
