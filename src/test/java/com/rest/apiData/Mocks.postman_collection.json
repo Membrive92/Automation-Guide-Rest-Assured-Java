@@ -1,0 +1,653 @@
+{
+	"info": {
+		"_postman_id": "a32ac8d2-982f-4992-9e24-089a80b0474c",
+		"name": "Mocks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10819346"
+	},
+	"item": [
+		{
+			"name": "Mockserver",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-mock-response-code",
+						"value": "403",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "header",
+						"value": "value1",
+						"type": "text"
+					},
+					{
+						"key": "x-mock-match-request-headers",
+						"value": "header",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io/get",
+					"protocol": "https",
+					"host": [
+						"b9f7a298-1b18-4062-b3ce-6c08731ac0bd",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"get"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io/get/200",
+							"protocol": "https",
+							"host": [
+								"b9f7a298-1b18-4062-b3ce-6c08731ac0bd",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"get",
+								"200"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"msg\":\"sucessful\"\r\n}"
+				},
+				{
+					"name": "503",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io/get/503",
+							"protocol": "https",
+							"host": [
+								"b9f7a298-1b18-4062-b3ce-6c08731ac0bd",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"get",
+								"503"
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"msg\":\"service unavailable for generic response\"\r\n}"
+				},
+				{
+					"name": "404",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io/get/404",
+							"protocol": "https",
+							"host": [
+								"b9f7a298-1b18-4062-b3ce-6c08731ac0bd",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"get",
+								"404"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 05 Aug 2023 12:42:15 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "27"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=fb9ee8c041155752"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=e0141123290fbaaf"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "120"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "119"
+						},
+						{
+							"key": "X-RateLimit-Reset",
+							"value": "1691239394"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1b-Z/ilBxI3euzxFEIUM1XGua/BNig\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"Not found thing\"\n}"
+				},
+				{
+					"name": "403",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io/get/403",
+							"protocol": "https",
+							"host": [
+								"b9f7a298-1b18-4062-b3ce-6c08731ac0bd",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"get",
+								"403"
+							]
+						}
+					},
+					"code": 403,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"msg\": \"Forbidden access\"\r\n}"
+				},
+				{
+					"name": "headerValue1",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "header",
+								"value": "value1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io/get",
+							"protocol": "https",
+							"host": [
+								"b9f7a298-1b18-4062-b3ce-6c08731ac0bd",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"get"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "responseHeader",
+							"value": "resValue1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "multiValueHeader",
+							"value": "resValue2, resValue3",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"msg\":\"headerValue1\"\r\n}"
+				},
+				{
+					"name": "headerValue2",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "header",
+								"value": "value2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io/get",
+							"protocol": "https",
+							"host": [
+								"b9f7a298-1b18-4062-b3ce-6c08731ac0bd",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"get"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "responseHeader",
+							"value": "resValue2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"msg\":\"responseValue2\"\r\n}"
+				},
+				{
+					"name": "sucess",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-mock-response-code",
+								"value": "403",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "header",
+								"value": "value1",
+								"type": "text"
+							},
+							{
+								"key": "x-mock-match-request-headers",
+								"value": "header",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=utf-8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\"id\": \"5001\", \"type\": \"None\"},\r\n    {\"id\": \"5002\", \"type\": \"Glazed\"}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io/post",
+							"protocol": "https",
+							"host": [
+								"b9f7a298-1b18-4062-b3ce-6c08731ac0bd",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json;chartset=utf-8",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"success\"\n}"
+				}
+			]
+		},
+		{
+			"name": "postJsonArray",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-mock-response-code",
+						"value": "403",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "header",
+						"value": "value1",
+						"type": "text"
+					},
+					{
+						"key": "x-mock-match-request-headers",
+						"value": "header",
+						"type": "text"
+					},
+					{
+						"key": "conten",
+						"value": "application/json;charset=utf-8",
+						"type": "text"
+					},
+					{
+						"key": "x-mock-match-request-body",
+						"value": "true",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\"id\": \"5001\", \"type\": \"None\"},\r\n    {\"id\": \"5002\", \"type\": \"Glazed\"}\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io/post",
+					"protocol": "https",
+					"host": [
+						"b9f7a298-1b18-4062-b3ce-6c08731ac0bd",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postComplexjson",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-mock-response-code",
+						"value": "403",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "header",
+						"value": "value1",
+						"type": "text"
+					},
+					{
+						"key": "x-mock-match-request-headers",
+						"value": "header",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=utf-8",
+						"type": "text"
+					},
+					{
+						"key": "x-mock-match-request-body",
+						"value": "true",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ppu\": 0.55,\r\n    \"batters\": {\r\n        \"batter\": [\r\n            {\r\n                \"id\": \"1001\",\r\n                \"type\": \"Regular\"\r\n            },\r\n            {\r\n                \"id\": [\r\n                    5,\r\n                    9\r\n                ],\r\n                \"type\": \"Chocolate\"\r\n            }\r\n        ]\r\n    },\r\n    \"name\": \"Cake\",\r\n    \"id\": \"0001\",\r\n    \"type\": \"donut\",\r\n    \"topping\": [\r\n        {\r\n            \"id\": \"5001\",\r\n            \"type\": \"None\"\r\n        },\r\n        {\r\n            \"id\": \"5002\",\r\n            \"type\": [\r\n                \"test1\",\r\n                \"test2\"\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io/postComplexJson",
+					"protocol": "https",
+					"host": [
+						"b9f7a298-1b18-4062-b3ce-6c08731ac0bd",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"postComplexJson"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-mock-response-code",
+								"value": "403",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "header",
+								"value": "value1",
+								"type": "text"
+							},
+							{
+								"key": "x-mock-match-request-headers",
+								"value": "header",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=utf-8",
+								"type": "text"
+							},
+							{
+								"key": "x-mock-match-request-body",
+								"value": "true",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ppu\": 0.55,\r\n    \"batters\": {\r\n        \"batter\": [\r\n            {\r\n                \"id\": \"1001\",\r\n                \"type\": \"Regular\"\r\n            },\r\n            {\r\n                \"id\": [\r\n                    5,\r\n                    9\r\n                ],\r\n                \"type\": \"Chocolate\"\r\n            }\r\n        ]\r\n    },\r\n    \"name\": \"Cake\",\r\n    \"id\": \"0001\",\r\n    \"type\": \"donut\",\r\n    \"topping\": [\r\n        {\r\n            \"id\": \"5001\",\r\n            \"type\": \"None\"\r\n        },\r\n        {\r\n            \"id\": \"5002\",\r\n            \"type\": [\r\n                \"test1\",\r\n                \"test2\"\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io/postComplexJson",
+							"protocol": "https",
+							"host": [
+								"b9f7a298-1b18-4062-b3ce-6c08731ac0bd",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"postComplexJson"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=utf-8",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"Success\"\n}"
+				}
+			]
+		},
+		{
+			"name": "simplePojo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"key1\": \"value1\",\r\n    \"key2\": \"value2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io/postSimpleJson",
+					"protocol": "https",
+					"host": [
+						"b9f7a298-1b18-4062-b3ce-6c08731ac0bd",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"postSimpleJson"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"key1\": \"value1\",\r\n    \"key2\": \"value2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://b9f7a298-1b18-4062-b3ce-6c08731ac0bd.mock.pstmn.io/postSimpleJson",
+							"protocol": "https",
+							"host": [
+								"b9f7a298-1b18-4062-b3ce-6c08731ac0bd",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"postSimpleJson"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"key1\": \"value1\",\r\n    \"key2\": \"value2\"\r\n}"
+				}
+			]
+		}
+	]
+}

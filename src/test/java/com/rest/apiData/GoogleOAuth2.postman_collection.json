@@ -1,0 +1,439 @@
+{
+	"info": {
+		"_postman_id": "c8b8269d-6b94-4580-a833-067cfa4b13d1",
+		"name": "GoogleOAuth2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10819346"
+	},
+	"item": [
+		{
+			"name": "Authorize",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://accounts.google.com/o/oauth2/v2/auth?scope=https://mail.google.com/&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=https://localhost:8080&client_id=271848153370-bv90b52h2gflqadj3jasl2lefrtnjb66.apps.googleusercontent.com",
+					"protocol": "https",
+					"host": [
+						"accounts",
+						"google",
+						"com"
+					],
+					"path": [
+						"o",
+						"oauth2",
+						"v2",
+						"auth"
+					],
+					"query": [
+						{
+							"key": "scope",
+							"value": "https://mail.google.com/"
+						},
+						{
+							"key": "access_type",
+							"value": "offline"
+						},
+						{
+							"key": "include_granted_scopes",
+							"value": "true"
+						},
+						{
+							"key": "response_type",
+							"value": "code"
+						},
+						{
+							"key": "state",
+							"value": "state_parameter_passthrough_value"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://localhost:8080"
+						},
+						{
+							"key": "client_id",
+							"value": "271848153370-bv90b52h2gflqadj3jasl2lefrtnjb66.apps.googleusercontent.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "271848153370-bv90b52h2gflqadj3jasl2lefrtnjb66.apps.googleusercontent.com",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "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",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "4/F0AfJohXmWHYxek_0sqsM8b9vaMijeWKzJ10C3kj8Ap15dGFbYT-g9vpcf-RmYV5wdLDX6Rg",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://localhost:8080",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://oauth2.googleapis.com/token",
+					"protocol": "https",
+					"host": [
+						"oauth2",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTokenOpenId",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "271848153370-bv90b52h2gflqadj3jasl2lefrtnjb66.apps.googleusercontent.com",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "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",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "4/0AfJohXkwyIYx8a8kRkwjjTfs-X5QZajMs_Z-g7DeAgYCr0NI-edE9xNpGGpsXNcK2ivxOQ",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://localhost:8080",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://oauth2.googleapis.com/token",
+					"protocol": "https",
+					"host": [
+						"oauth2",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RenewToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "271848153370-bv90b52h2gflqadj3jasl2lefrtnjb66.apps.googleusercontent.com",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "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",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "1//03wsGmuvBrfTACgYIARAAGAMSNwF-L9IrjnhhvQMIQvGjYl_A16xurKM-Ahm7LbpgluZlXOCIEE5IlIV0kiPsK6GF8YdowhpOLFw",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://oauth2.googleapis.com/token?client_id=271848153370-bv90b52h2gflqadj3jasl2lefrtnjb66.apps.googleusercontent.com&client_secret=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&grant_type=refresh_token&refresh_token=1//03wsGmuvBrfTACgYIARAAGAMSNwF-L9IrjnhhvQMIQvGjYl_A16xurKM-Ahm7LbpgluZlXOCIEE5IlIV0kiPsK6GF8YdowhpOLFw",
+					"protocol": "https",
+					"host": [
+						"oauth2",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"token"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "271848153370-bv90b52h2gflqadj3jasl2lefrtnjb66.apps.googleusercontent.com"
+						},
+						{
+							"key": "client_secret",
+							"value": "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"
+						},
+						{
+							"key": "grant_type",
+							"value": "refresh_token"
+						},
+						{
+							"key": "refresh_token",
+							"value": "1//03wsGmuvBrfTACgYIARAAGAMSNwF-L9IrjnhhvQMIQvGjYl_A16xurKM-Ahm7LbpgluZlXOCIEE5IlIV0kiPsK6GF8YdowhpOLFw"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RenewToken Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://oauth2.googleapis.com/token",
+					"protocol": "https",
+					"host": [
+						"oauth2",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserProfile",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ya29.a0AfB_byBLfJyPai5K7cKmKYhMpNwt6_C0QtxyvU_I01etSCYPHZCpOA2lzx_XiLqmwjduzWExMoCPJ4upCxKaCjA9uKksuzlHMKK_-thWdxxsvr8cZPf1BovrlmGuxybzBlaIby7NUB2axwcIqbmmbmSzk-e0yjrK-AaCgYKAWcSARESFQHGX2Mi1qfJZK2FOPsmwk6VXNSOZw0169",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gmail.googleapis.com/gmail/v1/users/joseapitst@gmail.com/profile",
+					"protocol": "https",
+					"host": [
+						"gmail",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"gmail",
+						"v1",
+						"users",
+						"joseapitst@gmail.com",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SendMessage",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ya29.a0AfB_byDRUY3mYp0rp2IBgFWMZ4m8ZDHidPiSfDB9Qu-kkxWH_W06OPKWuZH2i-HjVi_66pu0dAsc5kaRfEtyxBRy1n0_LhNzRFr_9he_mBcSWL3e6Ffu-63IsEG3Q1a4qTuL_o-EoKHUFZ1KQMEIwmmlI-3ew16SNyNCwQaCgYKAXoSARESFQHGX2Mi4GvH7cO-2IWRIU0T1DmtkQ0173",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"raw\":\"RnJvbTogam9zZWFwaXRzdEBnbWFpbC5jb20KVG86IGpvc2VhcGl0c3RAZ21haWwuY29tClN1YmplY3Q6IFRlc3QgRW1haWwKClNlbmRpbmcgZnJvbSBHbWFpbCBBcGk=\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gmail.googleapis.com/gmail/v1/users/joseapitst@gmail.com/messages/send",
+					"protocol": "https",
+					"host": [
+						"gmail",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"gmail",
+						"v1",
+						"users",
+						"joseapitst@gmail.com",
+						"messages",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ImplicitGrantFlow",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://accounts.google.com/o/oauth2/v2/auth?scope=https://mail.google.com/&include_granted_scopes=true&response_type=token&state=state_parameter_passthrough_value&redirect_uri=https://localhost:8080&client_id=271848153370-bv90b52h2gflqadj3jasl2lefrtnjb66.apps.googleusercontent.com",
+					"protocol": "https",
+					"host": [
+						"accounts",
+						"google",
+						"com"
+					],
+					"path": [
+						"o",
+						"oauth2",
+						"v2",
+						"auth"
+					],
+					"query": [
+						{
+							"key": "scope",
+							"value": "https://mail.google.com/"
+						},
+						{
+							"key": "include_granted_scopes",
+							"value": "true"
+						},
+						{
+							"key": "response_type",
+							"value": "token"
+						},
+						{
+							"key": "state",
+							"value": "state_parameter_passthrough_value"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://localhost:8080"
+						},
+						{
+							"key": "client_id",
+							"value": "271848153370-bv90b52h2gflqadj3jasl2lefrtnjb66.apps.googleusercontent.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OpenIdConnectAuthorize",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=271848153370-bv90b52h2gflqadj3jasl2lefrtnjb66.apps.googleusercontent.com&scope=openid%20email%20https://mail.google.com/&redirect_uri=https://localhost:8080&state=security_token%3D138r5719ru3e1%26url%3Dhttps%3A%2F%2Foauth2-login-gmail.com%2FmyHome&nonce=0394852-3190485-2490358&hd=example.com",
+					"protocol": "https",
+					"host": [
+						"accounts",
+						"google",
+						"com"
+					],
+					"path": [
+						"o",
+						"oauth2",
+						"v2",
+						"auth"
+					],
+					"query": [
+						{
+							"key": "response_type",
+							"value": "code"
+						},
+						{
+							"key": "client_id",
+							"value": "271848153370-bv90b52h2gflqadj3jasl2lefrtnjb66.apps.googleusercontent.com"
+						},
+						{
+							"key": "scope",
+							"value": "openid%20email%20https://mail.google.com/"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://localhost:8080"
+						},
+						{
+							"key": "state",
+							"value": "security_token%3D138r5719ru3e1%26url%3Dhttps%3A%2F%2Foauth2-login-gmail.com%2FmyHome"
+						},
+						{
+							"key": "nonce",
+							"value": "0394852-3190485-2490358"
+						},
+						{
+							"key": "hd",
+							"value": "example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

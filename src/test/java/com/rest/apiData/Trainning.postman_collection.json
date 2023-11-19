@@ -1,0 +1,420 @@
+{
+	"info": {
+		"_postman_id": "40642240-d452-4ae6-ad02-307edaeabb55",
+		"name": "Trainning",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10819346"
+	},
+	"item": [
+		{
+			"name": "GetWorkspaces",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/workspaces",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"workspaces"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postWorkspaces",
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"workspace\":{\r\n        \"name\": \"myFirstWorkspace\",\r\n        \"type\": \"personal\",\r\n        \"description\": \"Rest Assured created this\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/workspaces",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"workspaces"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "putWorkspaces",
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"workspace\":{\r\n        \"name\": \"myFirstWorkspace\",\r\n        \"type\": \"personal\",\r\n        \"description\": \"Rest Assured created this (put)\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/workspaces/3d1ad052-8a25-4b74-987d-f981146f6759",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"workspaces",
+						"3d1ad052-8a25-4b74-987d-f981146f6759"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteWorkspaces",
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"workspace\":{\r\n        \"name\": \"myFirstWorkspace\",\r\n        \"type\": \"personal\",\r\n        \"description\": \"Rest Assured created this (put)\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/workspaces/3d1ad052-8a25-4b74-987d-f981146f6759",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"workspaces",
+						"3d1ad052-8a25-4b74-987d-f981146f6759"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Echo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/post?foo2=bar2&foo1=bar1",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					],
+					"query": [
+						{
+							"key": "foo2",
+							"value": "bar2"
+						},
+						{
+							"key": "foo1",
+							"value": "bar1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EncodedUrl",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "key1",
+							"value": "value1",
+							"type": "text"
+						},
+						{
+							"key": "key2",
+							"value": "value2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post?foo2=bar2&foo1=bar1",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					],
+					"query": [
+						{
+							"key": "foo2",
+							"value": "bar2"
+						},
+						{
+							"key": "foo1",
+							"value": "bar1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Multipart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/post?foo1=bar1",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					],
+					"query": [
+						{
+							"key": "foo1",
+							"value": "bar1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "File",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/membr/Desktop/temp.txt"
+						},
+						{
+							"key": "attributes",
+							"value": "{\"name\":\"temp.txt\",\"parent\":{\"id\":\"123456\"}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post?",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reqres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Collection",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "apiKey",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "{{apiKey}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"collection\": {\r\n        \"info\": {\r\n            \"name\": \"Sample Collection 909\",\r\n            \"description\": \"This is just a sample collection.\",\r\n            \"schema\": \"https://schema.getpostman.com/json/collection/v2.1.0/collection.json\"\r\n        },\r\n        \"item\": [\r\n            {\r\n                \"name\": \"This is a folder\",\r\n                \"item\": [\r\n                    {\r\n                        \"name\": \"Sample POST Request\",\r\n                        \"request\": {\r\n                            \"url\": \"https://postman-echo.com/post\",\r\n                            \"method\": \"POST\",\r\n                            \"header\": [\r\n                                {\r\n                                    \"key\": \"Content-Type\",\r\n                                    \"value\": \"application/json\"\r\n                                }\r\n                            ],\r\n                            \"body\": {\r\n                                \"mode\": \"raw\",\r\n                                \"raw\": \"{\\\"data\\\": \\\"123\\\"}\"\r\n                            },\r\n                            \"description\": \"This is a sample POST Request\"\r\n                        }\r\n                    }\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Sample GET Request\",\r\n                \"request\": {\r\n                    \"url\": \"https://postman-echo/get\",\r\n                    \"method\": \"GET\",\r\n                    \"description\": \"This is a sample GET Request\"\r\n                }\r\n            }\r\n        ]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://api.getpostman.com/collections",
+					"protocol": "https",
+					"host": [
+						"api",
+						"getpostman",
+						"com"
+					],
+					"path": [
+						"collections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postCollection",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"collection\": {\r\n        \"info\": {\r\n            \"name\": \"Sample Collection 909\",\r\n            \"description\": \"This is just a sample collection.\",\r\n            \"schema\": \"https://schema.getpostman.com/json/collection/v2.1.0/collection.json\"\r\n        },\r\n        \"item\": [\r\n            {\r\n                \"name\": \"This is a folder\",\r\n                \"item\": [\r\n                    {\r\n                        \"name\": \"Sample POST Request\",\r\n                        \"request\": {\r\n                            \"url\": \"https://postman-echo.com/post\",\r\n                            \"method\": \"POST\",\r\n                            \"header\": [\r\n                                {\r\n                                    \"key\": \"Content-Type\",\r\n                                    \"value\": \"application/json\"\r\n                                }\r\n                            ],\r\n                            \"body\": {\r\n                                \"mode\": \"raw\",\r\n                                \"raw\": \"{\\\"data\\\": \\\"123\\\"}\"\r\n                            },\r\n                            \"description\": \"This is a sample POST Request\"\r\n                        }\r\n                    }\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Sample GET Request\",\r\n                \"request\": {\r\n                    \"url\": \"https://postman-echo/get\",\r\n                    \"method\": \"GET\",\r\n                    \"description\": \"This is a sample GET Request\"\r\n                }\r\n            }\r\n        ]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/collections",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"collections"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Collection Created",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"collection\": {\r\n        \"info\": {\r\n            \"name\": \"Sample Collection 909\",\r\n            \"description\": \"This is just a sample collection.\",\r\n            \"schema\": \"https://schema.getpostman.com/json/collection/v2.1.0/collection.json\"\r\n        },\r\n        \"item\": [\r\n            {\r\n                \"name\": \"This is a folder\",\r\n                \"item\": [\r\n                    {\r\n                        \"name\": \"Sample POST Request\",\r\n                        \"request\": {\r\n                            \"url\": \"https://postman-echo.com/post\",\r\n                            \"method\": \"POST\",\r\n                            \"header\": [\r\n                                {\r\n                                    \"key\": \"Content-Type\",\r\n                                    \"value\": \"application/json\"\r\n                                }\r\n                            ],\r\n                            \"body\": {\r\n                                \"mode\": \"raw\",\r\n                                \"raw\": \"{\\\"data\\\": \\\"123\\\"}\"\r\n                            },\r\n                            \"description\": \"This is a sample POST Request\"\r\n                        }\r\n                    }\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Sample GET Request\",\r\n                \"request\": {\r\n                    \"url\": \"https://postman-echo/get\",\r\n                    \"method\": \"GET\",\r\n                    \"description\": \"This is a sample GET Request\"\r\n                }\r\n            }\r\n        ]\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/collections",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"collections"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "getCollection",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"collection\": {\r\n        \"info\": {\r\n            \"name\": \"Sample Collection 909\",\r\n            \"description\": \"This is just a sample collection.\",\r\n            \"schema\": \"https://schema.getpostman.com/json/collection/v2.1.0/collection.json\"\r\n        },\r\n        \"item\": [\r\n            {\r\n                \"name\": \"This is a folder\",\r\n                \"item\": [\r\n                    {\r\n                        \"name\": \"Sample POST Request\",\r\n                        \"request\": {\r\n                            \"url\": \"https://postman-echo.com/post\",\r\n                            \"method\": \"POST\",\r\n                            \"header\": [\r\n                                {\r\n                                    \"key\": \"Content-Type\",\r\n                                    \"value\": \"application/json\"\r\n                                }\r\n                            ],\r\n                            \"body\": {\r\n                                \"mode\": \"raw\",\r\n                                \"raw\": \"{\\\"data\\\": \\\"123\\\"}\"\r\n                            },\r\n                            \"description\": \"This is a sample POST Request\"\r\n                        }\r\n                    }\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Sample GET Request\",\r\n                \"request\": {\r\n                    \"url\": \"https://postman-echo/get\",\r\n                    \"method\": \"GET\",\r\n                    \"description\": \"This is a sample GET Request\"\r\n                }\r\n            }\r\n        ]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/collections",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"collections"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
