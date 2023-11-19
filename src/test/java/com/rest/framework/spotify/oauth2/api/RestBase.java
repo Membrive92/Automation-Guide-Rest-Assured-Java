@@ -1,5 +1,6 @@
 package com.rest.framework.spotify.oauth2.api;
 
+import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
@@ -12,6 +13,7 @@ import static io.restassured.RestAssured.given;
 
 public class RestBase {
 
+    @Step
     public static Response post(String path, String token, Object requestPlaylist){
         return given(getRequestSpec()).
                 body(requestPlaylist).
@@ -22,6 +24,7 @@ public class RestBase {
                 response();
     }
 
+    @Step
     public static Response postAccount(HashMap<String, String> formParams){
         return given(getAccountRequestSpec()).
                 formParams(formParams).
@@ -31,6 +34,7 @@ public class RestBase {
                 response();
     }
 
+    @Step
     public static Response get(String path, String token){
         return given(getRequestSpec()).
                 header("Authorization", "Bearer "+ token).
@@ -40,6 +44,7 @@ public class RestBase {
                 response();
     }
 
+    @Step
     public static Response put(String path, String token, Object requestPlaylist){
        return given(getRequestSpec()).
                 header("Authorization", "Bearer "+ token).
