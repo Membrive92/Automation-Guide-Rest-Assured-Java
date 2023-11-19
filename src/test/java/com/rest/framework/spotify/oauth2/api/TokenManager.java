@@ -38,15 +38,7 @@ public class TokenManager {
         formParams.put("refresh_token","AQDMbU1ipH0cgClkxlbxCACw36kntG5_N2g4ZL7v7g5oNcS6tnFyDWBaiJf4jdLJQfPdCLNzc_3EFdD64FpqCu1KiMYtNeCpWCGvTEp_tIQ1K6eiAwt74Qs3jB_IHfEyf3c");
         formParams.put("grant_type","refresh_token");
 
-        Response response = given().
-                baseUri("https://accounts.spotify.com").
-                contentType(ContentType.URLENC).
-                formParams(formParams).
-                log().all().
-        when().post("/api/token").
-        then().spec(getResponseSpec()).
-                extract().
-                response();
+        Response response = RestBase.postAccount(formParams);
 
         if (response.statusCode() != 200){
             throw new RuntimeException("Renew token has failed");
